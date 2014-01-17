@@ -1,19 +1,36 @@
 package org.phin.mu.frame;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.mu.lib.Reference;
 import org.phin.mu.lib.Strings;
+import org.phin.mu.util.LAFHandler;
 
 public class LoginFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	// Component fields/variables 
 	private JPanel contentPane;
+	private JTextField userNameField;
+	private JPasswordField passwordField;
+	private JLabel lblUsername;
+	private JLabel lblPassword;
+	private JLabel lblVisiblePassword;
+	private JButton btnViewPassword;
+	private JTextField visiblePasswordField;
+	private JButton btnLogin;
 
 	public LoginFrame() {
 		this.createGUI();
@@ -21,15 +38,27 @@ public class LoginFrame extends JFrame {
 	
 	private void createGUI() {
 		
+		// look and feel handler
+		LAFHandler.setNativeLookAndFeel();
+		
+		// checks the current size and sets the frames size accordingly  
+		if ((Strings.CURRENT_HEIGHT != 0) || (Strings.CURRENT_WIDTH != 0)) {
+			this.setBounds(100, 100, Strings.CURRENT_WIDTH, Strings.CURRENT_HEIGHT);
+			this.setSize(Strings.CURRENT_DIM);
+		} else {
+			this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
+			this.setSize(Strings.DEFAULT_DIM);
+		}
+				
 		// JFrame related methods
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(Strings.DEFAULT_DIM);
 		this.setTitle(Reference.MU_TITLE);
 		this.setResizable(false);
 		this.setEnabled(true);
 		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+
 		
 		// content pane related methods
 		this.contentPane = new JPanel();
@@ -37,6 +66,61 @@ public class LoginFrame extends JFrame {
 		this.contentPane.setLayout(null);
 		this.contentPane.setBackground(Color.LIGHT_GRAY);
 		this.setContentPane(this.contentPane);
+		
+		// components 
+		this.userNameField = new JTextField();
+		this.userNameField.setToolTipText("enter a user name here");
+		this.userNameField.setBounds(329, 160, 86, 20);
+		this.userNameField.setColumns(10);
+		this.contentPane.add(this.userNameField);
+		
+		this.lblUsername = new JLabel("username:");
+		this.lblUsername.setBounds(341, 135, 58, 14);
+		this.contentPane.add(this.lblUsername);
+		
+		this.passwordField = new JPasswordField();
+		this.passwordField.setBounds(329, 216, 86, 20);
+		this.contentPane.add(this.passwordField);
+		
+		this.lblPassword = new JLabel("password:");
+		this.lblPassword.setBounds(341, 191, 58, 14);
+		this.contentPane.add(this.lblPassword);
+		
+		this.visiblePasswordField = new JTextField();
+		this.visiblePasswordField.setEditable(false);
+		this.visiblePasswordField.setBounds(329, 270, 86, 20);
+		this.visiblePasswordField.setColumns(10);
+		this.contentPane.add(this.visiblePasswordField);
+		
+		this.lblVisiblePassword = new JLabel("visible password:");
+		this.lblVisiblePassword.setBounds(329, 247, 86, 14);
+		this.contentPane.add(this.lblVisiblePassword);
+		
+		this.btnViewPassword = new JButton("view password");
+		this.btnViewPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					char[] textPwd = passwordField.getPassword();
+					String password = String.valueOf(textPwd);
+					visiblePasswordField.setText(password);
+				} else {
+					Toolkit.getDefaultToolkit().beep();
+				}
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				visiblePasswordField.setText("");
+			}
+			
+		});
+		this.btnViewPassword.setBounds(425, 216, 103, 20);
+		this.contentPane.add(this.btnViewPassword);
+		
+		this.btnLogin = new JButton("login");
+		this.btnLogin.setBounds(327, 610, 89, 23);
+		this.contentPane.add(this.btnLogin);
+	
 	}
-
 }
