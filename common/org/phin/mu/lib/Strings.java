@@ -17,8 +17,6 @@ public class Strings {
 	// the current frame dimension
 	public static Dimension CURRENT_DIM = new Dimension(CURRENT_WIDTH, CURRENT_HEIGHT);
 	
-	public static boolean passwordVisible = false;
-	
 	// this is just for simplicity you should probably NOT
 	// store passwords and user names in a class but rather a database
 	public static final String ADMIN_USERNAME = "admin";
