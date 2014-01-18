@@ -22,4 +22,10 @@ public class Strings {
 	public static final String ADMIN_USERNAME = "admin";
 	public static final String ADMIN_PASSWORD = "password123;";
 	
+	public static final String USERNAME_1 = "leroy46";
+	public static final String PASSWORD_1 = "suagar12;";
+	
+	 // u means under privileged, a means Admin
+	public static boolean isAdmin = false;
+	
 }

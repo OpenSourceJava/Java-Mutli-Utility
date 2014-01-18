@@ -2,9 +2,12 @@ package org.phin.mu.frame;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.security.auth.login.CredentialException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import org.phin.mu.lib.Reference;
 import org.phin.mu.lib.Strings;
 import org.phin.mu.util.LAFHandler;
+import org.phin.mu.util.LoginHandler;
 
 public class LoginFrame extends JFrame {
 
@@ -58,7 +62,6 @@ public class LoginFrame extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-
 		
 		// content pane related methods
 		this.contentPane = new JPanel();
@@ -79,6 +82,28 @@ public class LoginFrame extends JFrame {
 		this.contentPane.add(this.lblUsername);
 		
 		this.passwordField = new JPasswordField();
+		this.passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					// username
+					String username = userNameField.getText();
+					
+					// password
+					char[] passwordArray = passwordField.getPassword();
+					String password = String.valueOf(passwordArray);
+					
+					try {
+						LoginHandler.login(password, username);
+						dispose();
+					} catch (CredentialException e1) {
+						e1.printStackTrace();
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				} 
+			}
+		});
 		this.passwordField.setBounds(329, 216, 86, 20);
 		this.contentPane.add(this.passwordField);
 		
@@ -119,8 +144,29 @@ public class LoginFrame extends JFrame {
 		this.contentPane.add(this.btnViewPassword);
 		
 		this.btnLogin = new JButton("login");
+		this.btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// username
+				String username = userNameField.getText();
+				
+				// password
+				char[] passwordArray = passwordField.getPassword();
+				String password = String.valueOf(passwordArray);
+				
+				try {
+					LoginHandler.login(password, username);
+					dispose();
+				} catch (CredentialException e1) {
+					e1.printStackTrace();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		this.btnLogin.setBounds(327, 610, 89, 23);
 		this.contentPane.add(this.btnLogin);
 	
 	}
+
 }
