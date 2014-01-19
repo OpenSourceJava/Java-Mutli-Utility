@@ -3,7 +3,6 @@ package org.phin.mu.util;
 import java.awt.Toolkit;
 
 import javax.security.auth.login.CredentialException;
-import javax.swing.JFrame;
 
 import org.phin.mu.frame.AdminMainFrame;
 import org.phin.mu.frame.ConsoleFrame;
@@ -15,12 +14,9 @@ public class LoginHandler {
 		if ((Strings.ADMIN_PASSWORD.equals(password)) && (Strings.ADMIN_USERNAME.equals(username))) {
 			Strings.isAdmin = true;
 			
-			// console creation
-			JFrame frame = new ConsoleFrame();
-			frame.setVisible(true);
-			
-			JFrame frame2 = new AdminMainFrame();
-			frame2.setVisible(true);
+			// frame creation
+			Strings.consoleFrame = new ConsoleFrame();
+			Strings.adminFrame = new AdminMainFrame();
 			
 		} else if ((Strings.USERNAME_1.equals(username) && (Strings.PASSWORD_1.equals(password)))) {
 			Strings.isAdmin = false;

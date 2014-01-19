@@ -46,7 +46,7 @@ public class LoginFrame extends JFrame {
 		LAFHandler.setNativeLookAndFeel();
 		
 		// checks the current size and sets the frames size accordingly  
-		if ((Strings.CURRENT_HEIGHT != 0) || (Strings.CURRENT_WIDTH != 0)) {
+		if ((Strings.CURRENT_HEIGHT != 0) && (Strings.CURRENT_WIDTH != 0)) {
 			this.setBounds(100, 100, Strings.CURRENT_WIDTH, Strings.CURRENT_HEIGHT);
 			this.setSize(Strings.CURRENT_DIM);
 		} else {
@@ -69,6 +69,12 @@ public class LoginFrame extends JFrame {
 		this.contentPane.setLayout(null);
 		this.contentPane.setBackground(Color.LIGHT_GRAY);
 		this.setContentPane(this.contentPane);
+		
+		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		} else {
+			this.contentPane.setBackground(Color.LIGHT_GRAY);
+		}
 		
 		// components 
 		this.userNameField = new JTextField();

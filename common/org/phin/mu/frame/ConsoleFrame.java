@@ -19,9 +19,7 @@ public class ConsoleFrame extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField textField;
-
 	private JButton btnEnter;
-
 	private JTextArea textArea;
 
 	public ConsoleFrame() {
@@ -33,13 +31,19 @@ public class ConsoleFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setSize(525, 325);
+		this.setVisible(true);
 				
 		// contentPane related inokes
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
-		this.contentPane.setBackground(Color.LIGHT_GRAY);
 		this.contentPane.setLayout(null);
+		
+		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		} else {
+			this.contentPane.setBackground(Color.LIGHT_GRAY);
+		}
 		
 		this.btnEnter = new JButton("enter");
 		this.btnEnter.addMouseListener(new MouseAdapter() {
