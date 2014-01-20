@@ -41,22 +41,22 @@ public class DialogOptionsDialog extends JFrame {
 		this.setTitle("dialog options");
 		this.setLocationRelativeTo(null);
 		
+		// sets the dialogs size
 		this.setBounds(100, 100, 600, 600);
 		this.setSize(600, 600);
 		
 		// contentPane related things
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(null);
+		this.setContentPane(this.contentPane);
 		
 		// sets the dialogs background color
 		if ((Strings.DIALOG_RED != 0) && (Strings.DIALOG_GREEN != 0) && (Strings.DIALOG_BLUE != 0)) {
 			this.contentPane.setBackground(new Color(Strings.DIALOG_RED, Strings.DIALOG_GREEN, Strings.DIALOG_BLUE));  
 		} else {
-			this.contentPane.setBackground(Color.LIGHT_GRAY);
+			this.contentPane.setBackground(Color.DARK_GRAY);
 		}
-		
-		this.setContentPane(this.contentPane);
-		this.contentPane.setLayout(null);
 		
 		this.lblInfo2 = new JLabel("choose wether or not a dialog appears when you click components");
 		this.lblInfo2.setBounds(10, 11, 324, 25);
@@ -111,15 +111,35 @@ public class DialogOptionsDialog extends JFrame {
 		this.contentPane.add(this.label_1);
 		
 		this.btnEnableReload = new JButton("enable reload dialog");
-		this.btnEnableReload.setBounds(10, 233, 133, 23);
+		this.btnEnableReload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.reloadPrompt = true;
+			}
+		});
+		this.btnEnableReload.setBounds(10, 233, 133, 23); 
 		this.contentPane.add(this.btnEnableReload);
 		
 		this.btnDisableReload = new JButton("disable reload dialog");
+		this.btnDisableReload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.reloadPrompt = false;
+			}
+		});
 		this.btnDisableReload.setBounds(10, 267, 133, 23);
 		this.contentPane.add(this.btnDisableReload);
 		
 		this.btnDefaults = new JButton("defaults");
-		this.btnDefaults.setBounds(10, 549, 89, 23);
+		this.btnDefaults.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.exitPrompt = true;
+				Strings.reloadPrompt = false;
+				Strings.logoutPrompt = true;
+			}
+		});
+		this.btnDefaults.setBounds(10, 540, 89, 23);
 		this.contentPane.add(this.btnDefaults);
 		
 	}

@@ -1,8 +1,11 @@
 package org.phin.mu.frame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +19,9 @@ public class AdminMainFrame extends JFrame {
 	
 	private JPanel contentPane;
 	private MenuHandler handler;
+	private JButton btnMyComputer;
+
+	private Component btnLog;
 
 	public AdminMainFrame() {
 		this.createGUI();
@@ -48,7 +54,7 @@ public class AdminMainFrame extends JFrame {
 		// contentPane usage
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.contentPane.setLayout(new BorderLayout(0, 0));
+		this.contentPane.setLayout(null);
 		
 		// Apply the background color
 		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
@@ -58,6 +64,28 @@ public class AdminMainFrame extends JFrame {
 		}
 		
 		this.setContentPane(this.contentPane);
+		
+		this.btnMyComputer = new JButton("My Computer");
+		this.btnMyComputer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ComputerFrame frame = new ComputerFrame();
+				frame.setVisible(true);
+			}
+		});
+		this.btnMyComputer.setBounds(10, 11, 110, 38);
+		this.contentPane.add(this.btnMyComputer);
+		
+		this.btnLog = new JButton("log");
+		this.btnLog.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				LogFrame frame = new LogFrame();
+				frame.setVisible(true);
+			}
+		});
+		this.btnLog.setBounds(130, 11, 110, 38);
+		this.contentPane.add(this.btnLog);
 		
 	}
 

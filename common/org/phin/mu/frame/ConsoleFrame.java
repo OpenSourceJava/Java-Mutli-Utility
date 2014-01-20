@@ -20,7 +20,7 @@ public class ConsoleFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnEnter;
-	private JTextArea textArea;
+	private static JTextArea textArea;
 
 	public ConsoleFrame() {
 		this.createGUI();
@@ -36,8 +36,8 @@ public class ConsoleFrame extends JFrame {
 		// contentPane related inokes
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setContentPane(this.contentPane);
 		this.contentPane.setLayout(null);
+		this.setContentPane(this.contentPane);
 		
 		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
 			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
@@ -66,10 +66,11 @@ public class ConsoleFrame extends JFrame {
 		this.textField.setColumns(10);
 		this.contentPane.add(this.textField);
 		
-		this.textArea = new JTextArea();
-		this.textArea.setEditable(false);
-		this.textArea.setBounds(10, 11, 499, 241);
-		this.contentPane.add(this.textArea);
+		ConsoleFrame.textArea = new JTextArea();
+		ConsoleFrame.textArea.setEditable(false);
+		ConsoleFrame.textArea.setAutoscrolls(true);
+		ConsoleFrame.textArea.setBounds(10, 11, 499, 241);
+		this.contentPane.add(ConsoleFrame.textArea);
 		
 		this.checkAccessLevel();
 		
@@ -79,11 +80,15 @@ public class ConsoleFrame extends JFrame {
 		if (Strings.isAdmin) {
 			this.setTitle("Admin Console");
 			this.textField.setEditable(true);
-			this.textArea.append("privilege level = admin");
+			ConsoleFrame.textArea.append("privilege level = admin \n");
 		} else {
 			this.setTitle("Console");
 			this.textField.setEditable(false);
-			this.textArea.append("privilege level = non-privileged");
+			ConsoleFrame.textArea.append("privilege level = non-privileged \n");
 		}
+	}
+	
+	public static void print(String string) {
+		ConsoleFrame.textArea.append(string);
 	}
 }

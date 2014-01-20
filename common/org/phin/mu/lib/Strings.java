@@ -47,17 +47,14 @@ public class Strings {
 	public static boolean exitPrompt = true; // by default
 	public static boolean reloadPrompt = false;
 	
+	// if a log is open isLog will be true otherwise and by default false
+	public static boolean isLog = false;
+	
 	// dialog dimensions
 	public static final int DEFAULT_DIALOG_WIDTH = 350;
 	public static final int DEFAULT_DIALOG_HEIGHT = 210;
 	
 	public static final Dimension DEFAULT_DIALOG_DIM = new Dimension(DEFAULT_DIALOG_WIDTH, DEFAULT_DIALOG_HEIGHT);
-	
-	// the user set dialog size
-	public static int CURRENT_DIALOG_WIDTH;
-	public static int  CURRENT_DIALOG_HEIGHT;
-	
-	public static Dimension CURRENT_DIALOG_DIM = new Dimension(CURRENT_DIALOG_WIDTH, CURRENT_DIALOG_HEIGHT);
 
 	// universal reference to a Admin frame (yes i am a noob and i can't make a logout system any other way)
 	public static AdminMainFrame adminFrame;

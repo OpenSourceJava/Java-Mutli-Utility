@@ -34,15 +34,9 @@ public class LogoutDialog extends JFrame {
 		this.setVisible(true);
 		this.setTitle("logout");
 		this.setLocationRelativeTo(null);
-		
-		// sets the dialogs size
-		if ((Strings.CURRENT_DIALOG_HEIGHT != 0) && (Strings.CURRENT_DIALOG_WIDTH != 0)) {
-			this.setBounds(100, 100, Strings.CURRENT_DIALOG_WIDTH, Strings.CURRENT_DIALOG_HEIGHT);
-			this.setSize(Strings.CURRENT_DIALOG_DIM);
-		} else {
-			this.setBounds(100, 100, Strings.DEFAULT_DIALOG_WIDTH, Strings.DEFAULT_DIALOG_HEIGHT);
-			this.setSize(Strings.DEFAULT_DIALOG_DIM);
-		}
+	
+		this.setBounds(100, 100, Strings.DEFAULT_DIALOG_WIDTH, Strings.DEFAULT_DIALOG_HEIGHT);
+		this.setSize(Strings.DEFAULT_DIALOG_DIM);
 		
 		// contentPane related things
 		this.contentPane = new JPanel();

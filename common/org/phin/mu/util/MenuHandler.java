@@ -8,6 +8,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import org.phin.cb1.frame.ChatBotFrame;
+import org.phin.deskcalc.frame.BasicCalculatorFrame;
 import org.phin.mu.dialog.DialogOptionsDialog;
 import org.phin.mu.dialog.ExitDialog;
 import org.phin.mu.dialog.LogoutDialog;
@@ -27,16 +29,25 @@ public class MenuHandler {
 	private JMenu helpMenu;
 	private JMenu appMenu;
 	private JMenu editMenu;
+	private JMenu windowMenu;
 	
 	// file menu items
 	private JMenuItem logoutItem;
 	private JMenuItem reloadItem;
 	private JMenuItem exitItem;
 	
-	// Edit menu things
+	// Edit menu items
 	private JMenuItem RGBItem;
 	private JMenuItem dialogItem;
 	private JMenuItem credentialItem;
+	
+	// App menu items
+	private JMenuItem calculator;
+	private JMenuItem chatBot;
+	private JMenuItem console;
+	
+	// window menu items
+	private JMenuItem windowSize;
 	
 	public final void initMenu(final JFrame frame) {
 		this.bar = new JMenuBar();
@@ -49,6 +60,7 @@ public class MenuHandler {
 		this.helpMenu = new JMenu("Help");
 		this.appMenu = new JMenu ("Applications");
 		this.editMenu = new JMenu("Edit");
+		this.windowMenu = new JMenu("Window");
 		
 		// file menu related things
 		this.logoutItem = new JMenuItem("Logout");
@@ -56,10 +68,10 @@ public class MenuHandler {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Strings.logoutPrompt) {
-					LogoutDialog dialog = new LogoutDialog();
+					JFrame dialog = new LogoutDialog();
 					dialog.setVisible(true);
 				} else {
-					LoginFrame frame = new LoginFrame();
+					JFrame frame = new LoginFrame();
 					frame.setVisible(true);
 					
 					// disposes of the universal admin frame and the console frame
@@ -90,7 +102,7 @@ public class MenuHandler {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Strings.exitPrompt) {
-					ExitDialog dialog = new ExitDialog();
+					JFrame dialog = new ExitDialog();
 					dialog.setVisible(true);
 				} else {
 					System.exit(0);
@@ -107,7 +119,7 @@ public class MenuHandler {
 		this.RGBItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				RGBDialog dialog = new RGBDialog();
+				JFrame dialog = new RGBDialog();
 				dialog.setVisible(true);
 			}
 		});
@@ -117,14 +129,69 @@ public class MenuHandler {
 		this.dialogItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				DialogOptionsDialog dialog = new DialogOptionsDialog();
+				JFrame dialog = new DialogOptionsDialog();
 				dialog.setVisible(true);
 			}
 		});
 		this.editMenu.add(this.dialogItem);
 		
+		this.credentialItem = new JMenuItem("password/username");
+		this.credentialItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO
+			}
+		});
+		
 		// adds edit menu to the menu bar
 		this.bar.add(this.editMenu);
+		
+		// application menu related things
+		this.calculator = new JMenuItem("Calculator");
+		this.calculator.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) { 
+				JFrame frame = new BasicCalculatorFrame();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
+		this.appMenu.add(this.calculator);
+		
+		this.chatBot = new JMenuItem("Chat Bot");
+		this.chatBot.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JFrame frame = new ChatBotFrame();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
+		this.appMenu.add(this.chatBot);
+		
+		this.console = new JMenuItem("Console");
+		this.console.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.consoleFrame.dispose();
+				Strings.consoleFrame = new ConsoleFrame();
+			}
+		});
+		this.appMenu.add(this.console);
+		
+		// adds app menu to the menu bar
+		this.bar.add(this.appMenu);
+		
+		// window related methods
+		this.windowSize = new JMenuItem("Window Size");
+		this.windowSize.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO
+			}
+		});
+		
+	
 	}
 	
 }
