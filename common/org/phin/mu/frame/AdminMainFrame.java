@@ -7,13 +7,12 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.dialog.MenuDialog;
 import org.phin.mu.lib.Strings;
 import org.phin.mu.util.MenuHandler;
-import javax.swing.JLabel;
 
 public class AdminMainFrame extends JFrame {
 
@@ -105,7 +104,7 @@ public class AdminMainFrame extends JFrame {
 		this.btnApplicationOptions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				MenuDialog frame = new MenuDialog();
+				AdminOptionsFrame frame = new AdminOptionsFrame();
 				frame.setVisible(true);
 			}
 		});

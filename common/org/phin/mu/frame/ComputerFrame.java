@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.mu.lib.Strings;
+import org.phin.mu.util.SystemHandler;
 
 public class ComputerFrame extends JFrame {
 
@@ -27,7 +28,6 @@ public class ComputerFrame extends JFrame {
 	private JButton btnOsVersion;
 	private JButton btnOsName;
 	private JButton btnSystemArchetecture;
-	private JLabel separator2;
 	private JButton btnJavaVendorUrl;
 	private JButton btnJavaVendor;
 	private JButton btnUserWD;
@@ -40,6 +40,13 @@ public class ComputerFrame extends JFrame {
 	private JButton btnStartNotepad;
 	private JButton btnRegedit;
 	private JLabel lblInfo2;
+	private JLabel label;
+	private JButton btnFreeRam;
+	private JButton btnRunGarbageCollector;
+	private JButton btnGetProcessors;
+	private JButton btnMaximumRam;
+	private JButton btnTotalRam;
+	private JButton btnRamDefinitions;
 
 	public ComputerFrame() {
 		this.createGUI();
@@ -155,10 +162,6 @@ public class ComputerFrame extends JFrame {
 		});
 		this.btnJavaVendor.setBounds(10, 417, 141, 23);
 		this.contentPane.add(this.btnJavaVendor);
-		
-		this.separator2 = new JLabel("-------------------------------------");
-		this.separator2.setBounds(10, 486, 158, 14);
-		this.contentPane.add(this.separator2);
 		
 		this.btnSystemArchetecture = new JButton("system architecture");
 		this.btnSystemArchetecture.addMouseListener(new MouseAdapter() {
@@ -332,6 +335,74 @@ public class ComputerFrame extends JFrame {
 		this.lblInfo2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		this.lblInfo2.setBounds(171, 11, 141, 28);
 		this.contentPane.add(this.lblInfo2);
+		
+		this.label = new JLabel("------------------------------------------------------------------------------------");
+		this.label.setBounds(10, 486, 363, 14);
+		this.contentPane.add(this.label);
+		
+		this.btnFreeRam = new JButton("current free RAM");
+		this.btnFreeRam.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SystemHandler.getRAM();
+			}
+		});
+		this.btnFreeRam.setBounds(161, 511, 141, 23);
+		this.contentPane.add(this.btnFreeRam);
+		
+		this.btnRunGarbageCollector = new JButton("run garbage collector");
+		this.btnRunGarbageCollector.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SystemHandler.runGC();
+			}
+		});
+		this.btnRunGarbageCollector.setBounds(161, 545, 141, 23);
+		this.contentPane.add(this.btnRunGarbageCollector);
+		
+		this.btnGetProcessors = new JButton("get processors");
+		this.btnGetProcessors.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SystemHandler.getProcessors();
+			}
+		});
+		this.btnGetProcessors.setBounds(161, 579, 141, 23);
+		this.contentPane.add(this.btnGetProcessors);
+		
+		this.btnMaximumRam = new JButton("maximum RAM");
+		this.btnMaximumRam.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SystemHandler.getMaxRAM();
+			}
+		});
+		this.btnMaximumRam.setBounds(312, 511, 141, 23);
+		this.contentPane.add(this.btnMaximumRam);
+		
+		this.btnTotalRam = new JButton("total RAM");
+		this.btnTotalRam.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SystemHandler.getTotalRam();
+			}
+		});
+		this.btnTotalRam.setBounds(312, 545, 141, 23);
+		this.contentPane.add(this.btnTotalRam);
+		
+		this.btnRamDefinitions = new JButton("RAM definitions");
+		this.btnRamDefinitions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.log.print("RAM = Random Access Memory \n");
+				Strings.log.print("JVM = Java Virtual Machine \n");
+				Strings.log.print("Total RAM = total ram in the JVM \n");
+				Strings.log.print("max RAM = most RAM the JVM will ever attempt to use \n");
+				Strings.log.print("GC or Grabage Collector = the JVMs way of freeing unused objects \n");
+			}
+		});
+		this.btnRamDefinitions.setBounds(312, 579, 141, 23);
+		this.contentPane.add(this.btnRamDefinitions);
 		
 	}
 }
