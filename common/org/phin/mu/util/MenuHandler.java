@@ -47,7 +47,7 @@ public class MenuHandler {
 	private JMenuItem console;
 	
 	// window menu items
-	private JMenuItem windowSize;
+	private JMenuItem showConsoleItem;
 	
 	public final void initMenu(final JFrame frame) {
 		this.bar = new JMenuBar();
@@ -86,11 +86,11 @@ public class MenuHandler {
 		this.reloadItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.consoleFrame.dispose();
-				Strings.consoleFrame = new ConsoleFrame();
-				
 				Strings.adminFrame.dispose();
+				Strings.consoleFrame.dispose();
+				
 				Strings.adminFrame = new AdminMainFrame();
+				Strings.consoleFrame = new ConsoleFrame();
 			}
 		});
 		this.fileMenu.add(this.reloadItem);
@@ -151,9 +151,12 @@ public class MenuHandler {
 		this.calculator.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) { 
-				JFrame frame = new BasicCalculatorFrame();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setVisible(true);
+				if (Strings.calculator != null) {
+					Strings.calculator.dispose();
+					Strings.calculator = new BasicCalculatorFrame();
+				} else {
+					Strings.calculator = new BasicCalculatorFrame();
+				}
 			}
 		});
 		this.appMenu.add(this.calculator);
@@ -162,9 +165,12 @@ public class MenuHandler {
 		this.chatBot.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				JFrame frame = new ChatBotFrame();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setVisible(true);
+				if (Strings.chatBot != null) {
+					Strings.chatBot.dispose();
+					Strings.chatBot = new ChatBotFrame();
+				} else {
+					Strings.chatBot = new ChatBotFrame();
+				}
 			}
 		});
 		this.appMenu.add(this.chatBot);
@@ -173,8 +179,10 @@ public class MenuHandler {
 		this.console.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.consoleFrame.dispose();
-				Strings.consoleFrame = new ConsoleFrame();
+				if (Strings.consoleFrame != null) {
+					Strings.consoleFrame.dispose();
+					Strings.consoleFrame = new ConsoleFrame();
+				}
 			}
 		});
 		this.appMenu.add(this.console);
@@ -182,15 +190,8 @@ public class MenuHandler {
 		// adds app menu to the menu bar
 		this.bar.add(this.appMenu);
 		
-		// window related methods
-		this.windowSize = new JMenuItem("Window Size");
-		this.windowSize.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO
-			}
-		});
-		
+		// adds the window menu to the menu bar
+		this.bar.add(this.windowMenu);
 	
 	}
 	

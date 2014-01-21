@@ -10,8 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.phin.mu.dialog.MenuDialog;
 import org.phin.mu.lib.Strings;
 import org.phin.mu.util.MenuHandler;
+import javax.swing.JLabel;
 
 public class AdminMainFrame extends JFrame {
 
@@ -22,21 +24,18 @@ public class AdminMainFrame extends JFrame {
 	private JButton btnMyComputer;
 
 	private Component btnLog;
+	private JButton btnApplicationOptions;
+	private JLabel label;
+	private JButton btnNetworkOptions;
 
 	public AdminMainFrame() {
 		this.createGUI();
 	}
 	
 	private void createGUI() {
-
-		// checks the current size and sets the frames size accordingly  
-		if ((Strings.CURRENT_HEIGHT != 0) && (Strings.CURRENT_WIDTH != 0)) {
-			this.setBounds(100, 100, Strings.CURRENT_WIDTH, Strings.CURRENT_HEIGHT);
-			this.setSize(Strings.CURRENT_DIM);
-		} else {
-			this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-			this.setSize(Strings.DEFAULT_DIM);
-		}
+		
+		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
+		this.setSize(Strings.DEFAULT_DIM);
 		
 		// general JFrame usage
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,8 +47,12 @@ public class AdminMainFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		// menu init
-		this.handler = new MenuHandler();
-		this.handler.initMenu(this);
+		if (Strings.menuBar) {
+			this.handler = new MenuHandler();
+			this.handler.initMenu(this);
+		} else {
+			ConsoleFrame.printMessage("info: menu bar has been disabled!");
+		}
 
 		// contentPane usage
 		this.contentPane = new JPanel();
@@ -80,12 +83,43 @@ public class AdminMainFrame extends JFrame {
 		this.btnLog.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				LogFrame frame = new LogFrame();
+				// log handler
+				if (Strings.log != null) {
+					if (!Strings.log.getText().equals("")) {
+						final String text = Strings.log.getText();
+						Strings.log.dispose();
+						Strings.log = new LogFrame(text);
+					} else {
+						Strings.log.dispose();
+						Strings.log = new LogFrame();
+					}
+				} else {
+					Strings.log = new LogFrame();
+				}
+			}
+		});
+		this.btnLog.setBounds(130, 11, 131, 38);
+		this.contentPane.add(this.btnLog);
+		
+		this.btnApplicationOptions = new JButton("application options");
+		this.btnApplicationOptions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				MenuDialog frame = new MenuDialog();
 				frame.setVisible(true);
 			}
 		});
-		this.btnLog.setBounds(130, 11, 110, 38);
-		this.contentPane.add(this.btnLog);
+		this.btnApplicationOptions.setBounds(10, 393, 163, 38);
+		this.contentPane.add(this.btnApplicationOptions);
+		
+		this.label = new JLabel("-----------------------------------------------------------------------------------------------");
+		this.label.setBounds(10, 368, 424, 14);
+		this.contentPane.add(this.label);
+		
+		// this will not be implemented for a long long time
+		this.btnNetworkOptions = new JButton("network options");
+		this.btnNetworkOptions.setBounds(10, 442, 163, 38);
+		this.contentPane.add(this.btnNetworkOptions);
 		
 	}
 

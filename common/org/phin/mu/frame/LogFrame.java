@@ -14,10 +14,15 @@ public class LogFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-	private static JTextArea textArea;
+	private JTextArea textArea;
 	
 	public LogFrame() {
 		this.createGUI();
+	}
+	
+	public LogFrame(String text) {
+		this.createGUI();
+		this.textArea.setText(text);
 	}
 	
 	private void createGUI() {
@@ -44,14 +49,18 @@ public class LogFrame extends JFrame {
 		
 		this.setContentPane(this.contentPane);
 		
-		LogFrame.textArea = new JTextArea();
-		LogFrame.textArea.setBounds(10, 11, 725, 650);
-		LogFrame.textArea.setEditable(false);
-		this.contentPane.add(LogFrame.textArea);
+		this.textArea = new JTextArea();
+		this.textArea.setBounds(10, 11, 725, 650);
+		this.textArea.setEditable(false);
+		this.contentPane.add(this.textArea);
 		
 	}
 	
-	public static void print(String string) {
-		LogFrame.textArea.append(string);
+	public void print(String string) {
+		this.textArea.append(string);
+	}
+	
+	public String getText() {
+		return this.textArea.getText();
 	}
 }

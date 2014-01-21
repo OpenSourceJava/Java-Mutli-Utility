@@ -2,8 +2,11 @@ package org.phin.mu.lib;
 
 import java.awt.Dimension;
 
+import org.phin.cb1.frame.ChatBotFrame;
+import org.phin.deskcalc.frame.BasicCalculatorFrame;
 import org.phin.mu.frame.AdminMainFrame;
 import org.phin.mu.frame.ConsoleFrame;
+import org.phin.mu.frame.LogFrame;
 
 public class Strings {
 	
@@ -11,15 +14,8 @@ public class Strings {
 	public static final int DEFAULT_HEIGHT = 700;
 	public static final int DEFAULT_WIDTH = 750;
 	
-	// user set height and width of the frame
-	public static int CURRENT_HEIGHT;
-	public static int CURRENT_WIDTH;
-	
 	// the dimension of the frame (width * height)
 	public static final Dimension DEFAULT_DIM = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	
-	// the current frame dimension
-	public static Dimension CURRENT_DIM = new Dimension(CURRENT_WIDTH, CURRENT_HEIGHT);
 	
 	// this is just for simplicity you should probably NOT
 	// store passwords and user names in a class but rather a database
@@ -42,13 +38,10 @@ public class Strings {
 	public static int DIALOG_GREEN = 0;
 	public static int DIALOG_BLUE = 0;
 	
-	// prompts
+	// prompt values
 	public static boolean logoutPrompt = true; // true by default
 	public static boolean exitPrompt = true; // by default
 	public static boolean reloadPrompt = false;
-	
-	// if a log is open isLog will be true otherwise and by default false
-	public static boolean isLog = false;
 	
 	// dialog dimensions
 	public static final int DEFAULT_DIALOG_WIDTH = 350;
@@ -56,8 +49,21 @@ public class Strings {
 	
 	public static final Dimension DEFAULT_DIALOG_DIM = new Dimension(DEFAULT_DIALOG_WIDTH, DEFAULT_DIALOG_HEIGHT);
 
-	// universal reference to a Admin frame (yes i am a noob and i can't make a logout system any other way)
+	// universal frames for managing what is open where easily 
 	public static AdminMainFrame adminFrame;
 	public static ConsoleFrame consoleFrame;
+	public static BasicCalculatorFrame calculator;
+	public static ChatBotFrame chatBot;
+	public static LogFrame log;
+	
+	// menu bar values
+	// this allows users to determine which menuBars to enable or disable
+	// and ensures that the menu Handler knows what to do
+	public static boolean menuBar = true;
+	public static boolean fileMenu = true;
+	public static boolean editMenu = true;
+	public static boolean helpMenu = true;
+	public static boolean appMenu = true;
+	public static boolean windowMenu = true;
 	
 }

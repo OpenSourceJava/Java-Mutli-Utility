@@ -80,15 +80,15 @@ public class ConsoleFrame extends JFrame {
 		if (Strings.isAdmin) {
 			this.setTitle("Admin Console");
 			this.textField.setEditable(true);
-			ConsoleFrame.textArea.append("privilege level = admin \n");
+			ConsoleFrame.textArea.append("info: privilege level = admin \n");
 		} else {
 			this.setTitle("Console");
 			this.textField.setEditable(false);
-			ConsoleFrame.textArea.append("privilege level = non-privileged \n");
+			ConsoleFrame.textArea.append("info: privilege level = non-privileged \n");
 		}
 	}
 	
-	public static void print(String string) {
-		ConsoleFrame.textArea.append(string);
+	public static void printMessage(String message) {
+		ConsoleFrame.textArea.append(message);
 	}
 }

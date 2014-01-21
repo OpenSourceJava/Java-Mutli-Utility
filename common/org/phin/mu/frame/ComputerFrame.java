@@ -53,7 +53,22 @@ public class ComputerFrame extends JFrame {
 		this.setTitle("My Computer");
 		this.setLocationRelativeTo(null);
 		
+		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
 		this.setSize(Strings.DEFAULT_DIM);
+		
+		// log handler
+		if (Strings.log != null) {
+			if (!Strings.log.getText().equals("")) {
+				final String text = Strings.log.getText();
+				Strings.log.dispose();
+				Strings.log = new LogFrame(text);
+			} else {
+				Strings.log.dispose();
+				Strings.log = new LogFrame();
+			}
+		} else {
+			Strings.log = new LogFrame();
+		}
 		
 		// contentPane related invocations
 		this.contentPane = new JPanel();
@@ -81,7 +96,7 @@ public class ComputerFrame extends JFrame {
 				try {
 					Runtime.getRuntime().exec("cmd /c start cmd");
 				} catch (Exception e1) {
-					ConsoleFrame.print("could not create process cmd.exe");
+					ConsoleFrame.printMessage("error: could not create process cmd.exe");
 					e1.printStackTrace();
 				}
 			}
@@ -96,7 +111,7 @@ public class ComputerFrame extends JFrame {
 				try {
 					Runtime.getRuntime().exec("powershell /c start powershell");
 				} catch (Exception e1) {
-					ConsoleFrame.print("could not create process powershell.exe");
+					ConsoleFrame.printMessage("error: could not create process powershell.exe");
 					e1.printStackTrace();
 				}
 			}
@@ -112,22 +127,32 @@ public class ComputerFrame extends JFrame {
 		this.btnJavaVersion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (Strings.isLog) {
-					
-				} else {
-					String string = System.getProperty("java.version");
-					ConsoleFrame.print("java version = " + string);
-				}
+				String string = System.getProperty("java.version");
+				Strings.log.print("java version = " + string + "\n");
 			}
 		});
 		this.btnJavaVersion.setBounds(10, 349, 141, 23);
 		this.contentPane.add(this.btnJavaVersion);
 		
 		this.btnJavaVendorUrl = new JButton("java vendor url");
+		this.btnJavaVendorUrl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("java.vendor.url");
+				Strings.log.print("java vendor url = " + string + "\n");
+			}
+		});
 		this.btnJavaVendorUrl.setBounds(10, 383, 141, 23);
 		this.contentPane.add(this.btnJavaVendorUrl);
 		
 		this.btnJavaVendor = new JButton("java vendor");
+		this.btnJavaVendor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("java.vendor");
+				Strings.log.print("java vendor = " + string + "\n");
+			}
+		});
 		this.btnJavaVendor.setBounds(10, 417, 141, 23);
 		this.contentPane.add(this.btnJavaVendor);
 		
@@ -136,42 +161,135 @@ public class ComputerFrame extends JFrame {
 		this.contentPane.add(this.separator2);
 		
 		this.btnSystemArchetecture = new JButton("system architecture");
+		this.btnSystemArchetecture.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("os.arch");
+				Strings.log.print("system architecture = " + string + "\n");
+			}
+		});
 		this.btnSystemArchetecture.setBounds(10, 511, 141, 23);
 		this.contentPane.add(this.btnSystemArchetecture);
 		
 		this.btnOsName = new JButton("OS name");
+		this.btnOsName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("os.name");
+				Strings.log.print("system name = " + string + "\n");
+			}
+		});
 		this.btnOsName.setBounds(10, 545, 141, 23);
 		this.contentPane.add(this.btnOsName);
 		
 		this.btnOsVersion = new JButton("OS version");
+		this.btnOsVersion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("os.version");
+				Strings.log.print("system version = " + string + "\n");
+			}
+		});
 		this.btnOsVersion.setBounds(10, 579, 141, 23);
 		this.contentPane.add(this.btnOsVersion);
 	
 		this.btnJavaInstallDirectory = new JButton("java install directory");
+		this.btnJavaInstallDirectory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("java.home");
+				Strings.log.print("java install directory = " + string + "\n");
+			}
+		});
 		this.btnJavaInstallDirectory.setBounds(10, 452, 141, 23);
 		this.contentPane.add(this.btnJavaInstallDirectory);
 		
+		// WD stands for working directory 
 		this.btnUserWD = new JButton("users working directory");
+		this.btnUserWD.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("user.dir");
+				Strings.log.print("user working directory  = " + string + "\n");
+			}
+		});
 		this.btnUserWD.setBounds(161, 349, 153, 23);
 		this.contentPane.add(this.btnUserWD);
 		
+		// HD stands for home directory 
 		this.btnUsersHD = new JButton("users home directory");
+		this.btnUsersHD.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("user.home");
+				Strings.log.print("users home directory  = " + string + "\n");
+			}
+		});
 		this.btnUsersHD.setBounds(161, 383, 133, 23);
 		this.contentPane.add(this.btnUsersHD);
 		
 		this.btnUserName = new JButton("user name");
+		this.btnUserName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string = System.getProperty("user.name");
+				Strings.log.print("users name  = " + string + "\n");
+			}
+		});
 		this.btnUserName.setBounds(161, 417, 133, 23);
 		this.contentPane.add(this.btnUserName);
 		
 		this.btnListJavaProps = new JButton("list Java props");
+		this.btnListJavaProps.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string1 = System.getProperty("java.version");
+				Strings.log.print("java version = " + string1 + "\n");
+				
+				String string2 = System.getProperty("java.vendor.url");
+				Strings.log.print("java vendor url = " + string2 + "\n");
+				
+				String string3 = System.getProperty("java.vendor");
+				Strings.log.print("java vendor = " + string3 + "\n");
+				
+				String string4 = System.getProperty("java.home");
+				Strings.log.print("java install directory = " + string4 + "\n");
+			}
+		});
 		this.btnListJavaProps.setBounds(10, 638, 125, 23);
 		this.contentPane.add(this.btnListJavaProps);
 		
 		this.btnListUserProps = new JButton("list user props");
+		this.btnListUserProps.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string1 = System.getProperty("user.dir");
+				Strings.log.print("user working directory  = " + string1 + "\n");
+				
+				String string2 = System.getProperty("user.home");
+				Strings.log.print("users home directory  = " + string2 + "\n");
+				
+				String string = System.getProperty("user.name");
+				Strings.log.print("users name  = " + string + "\n");
+			}
+		});
 		this.btnListUserProps.setBounds(145, 638, 133, 23);
 		this.contentPane.add(this.btnListUserProps);
 		
 		this.btnListSystemProps = new JButton("list system props");
+		this.btnListSystemProps.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String string1 = System.getProperty("os.name");
+				Strings.log.print("system name  = " + string1 + "\n");
+				
+				String string2 = System.getProperty("os.version");
+				Strings.log.print("system version  = " + string2 + "\n");
+				
+				String string3 = System.getProperty("os.arch");
+				Strings.log.print("system architecture  = " + string3 + "\n");
+			}
+		});
 		this.btnListSystemProps.setBounds(288, 638, 133, 23);
 		this.contentPane.add(this.btnListSystemProps);
 		
@@ -186,7 +304,7 @@ public class ComputerFrame extends JFrame {
 				try {
 					Runtime.getRuntime().exec("notepad");
 				} catch (Exception e1) {
-					ConsoleFrame.print("could not create process notepad.exe \n");
+					ConsoleFrame.printMessage("error: could not create process notepad.exe \n");
 					e1.printStackTrace();
 				}
 			}
@@ -201,8 +319,8 @@ public class ComputerFrame extends JFrame {
 				try {
 					Runtime.getRuntime().exec("regedit");
 				} catch (Exception e1) {
-					ConsoleFrame.print("could not create process regedit.exe \n");  
-					ConsoleFrame.print("(most likley need admin privileges) \n");
+					ConsoleFrame.printMessage("error: could not create process regedit.exe \n");  
+					ConsoleFrame.printMessage("error: (most likley need admin privileges) \n");
 					e1.printStackTrace();
 				}
 			}

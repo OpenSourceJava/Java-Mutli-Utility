@@ -45,17 +45,11 @@ public class LoginFrame extends JFrame {
 		// look and feel handler
 		LAFHandler.setNativeLookAndFeel();
 		
-		// checks the current size and sets the frames size accordingly  
-		if ((Strings.CURRENT_HEIGHT != 0) && (Strings.CURRENT_WIDTH != 0)) {
-			this.setBounds(100, 100, Strings.CURRENT_WIDTH, Strings.CURRENT_HEIGHT);
-			this.setSize(Strings.CURRENT_DIM);
-		} else {
-			this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-			this.setSize(Strings.DEFAULT_DIM);
-		}
+		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
+		this.setSize(Strings.DEFAULT_DIM);
 				
 		// JFrame related methods
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle(Reference.MU_TITLE);
 		this.setResizable(false);
 		this.setEnabled(true);

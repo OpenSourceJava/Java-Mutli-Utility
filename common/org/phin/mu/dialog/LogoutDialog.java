@@ -26,7 +26,7 @@ public class LogoutDialog extends JFrame {
 		this.createGUI();
 	}
 	
-	protected void createGUI() {
+	private void createGUI() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
