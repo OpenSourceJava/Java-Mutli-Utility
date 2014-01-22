@@ -6,6 +6,9 @@ as long as you follow the rules of the GPL v3, please read the LEGAL.txt for mor
 
 The first version of the Java Multi Utility is now available on mediafire for free. Its only in its Alpha state so dont expect much BUT there will be lots more in the future!
 
+the current username is: admin
+the current password is : password123;
+
 downloads:
 
 Java-Multi-Utility 1.0.0 Alpha: http://goo.gl/NjXP5x
