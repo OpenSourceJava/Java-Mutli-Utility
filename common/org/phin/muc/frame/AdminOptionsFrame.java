@@ -19,8 +19,8 @@ public class AdminOptionsFrame extends JFrame {
 	private void createGUI() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		this.setVisible(true);
 		this.setTitle("not implemented yet");
+		this.setVisible(true);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

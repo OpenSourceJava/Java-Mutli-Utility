@@ -27,7 +27,7 @@ public class MenuHandler {
 	
 	// JMenus
 	private JMenu fileMenu;
-	//private JMenu helpMenu; please leave me alone warnings </3 :'(
+	private JMenu helpMenu;
 	private JMenu appMenu;
 	private JMenu editMenu;
 	private JMenu windowMenu;
@@ -51,6 +51,9 @@ public class MenuHandler {
 	private JMenuItem showConsoleItem;
 	private JMenuItem startConsole;
 	
+	// help menu
+	private JMenuItem aboutItem;
+	
 	public final void initMenu(final JFrame frame) {
 		this.bar = new JMenuBar();
 		
@@ -59,7 +62,7 @@ public class MenuHandler {
 		
 		// menu instantiations 
 		this.fileMenu = new JMenu("File");
-		//this.helpMenu = new JMenu("Help"); //////////////////////
+		this.helpMenu = new JMenu("Help"); 
 		this.appMenu = new JMenu ("Applications");
 		this.editMenu = new JMenu("Edit");
 		this.windowMenu = new JMenu("Window");
@@ -99,7 +102,7 @@ public class MenuHandler {
 							Strings.reloadDialog = new ReloadDialog();
 						}
 					} else {
-						// reload TODO
+						ReloadHandler.reloadUI();
 					}
 				}
 			});
@@ -253,6 +256,18 @@ public class MenuHandler {
 			// adds the window menu to the menu bar
 			this.bar.add(this.windowMenu);
 		}
+		
+		// HELP MENU -----------------------------------------------------------
+		this.aboutItem = new JMenuItem("about");
+		this.aboutItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// display about dialog
+			}
+		});
+		this.helpMenu.add(this.aboutItem);
+		
+		this.bar.add(this.helpMenu);
 		
 		// ----------------------------------------------------------------------------
 	}

@@ -29,7 +29,7 @@ public class Strings {
 	
 	// the dimension of the frame (width * height)
 	public static final Dimension DEFAULT_DIM = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	
+
 	// this is just for simplicity you should probably NOT
 	// store passwords and user names in a class but rather a database
 	public static final String ADMIN_USERNAME = "admin";

@@ -1,14 +1,12 @@
 package org.phin.muc.dialog;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
@@ -20,12 +18,8 @@ public class LogDialog extends JFrame {
 	private JPanel contentPane;
 	private JButton btnOkay;
 	private JButton btnRevert;
-	private JTextField txtDefaultHeight;
-	private JTextField txtDefaultWidth;
-
-	private Component btnEnableTextSaving;
-
-	private Component btnDisableTextSaving;
+	private JButton btnEnableTextSaving;
+	private JButton btnDisableTextSaving;
 
 	public LogDialog() {
 		this.createGUI();
@@ -70,22 +64,24 @@ public class LogDialog extends JFrame {
 		this.setContentPane(this.contentPane);
 		
 		this.btnRevert = new JButton("revert");
+		this.btnRevert.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Strings.saveLogText = true;
+			}
+		});
 		this.btnRevert.setBounds(146, 148, 89, 23);
 		this.contentPane.add(this.btnRevert);
 		
 		this.btnOkay = new JButton("okay");
+		this.btnOkay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				dispose();
+			}
+		});
 		this.btnOkay.setBounds(245, 148, 89, 23);
 		this.contentPane.add(this.btnOkay);
-		
-		this.txtDefaultHeight = new JTextField("default height");
-		this.txtDefaultHeight.setBounds(10, 11, 86, 20);
-		this.txtDefaultHeight.setColumns(10);
-		this.contentPane.add(this.txtDefaultHeight);
-		
-		this.txtDefaultWidth = new JTextField("default width");
-		this.txtDefaultWidth.setBounds(10, 42, 86, 20);
-		this.txtDefaultWidth.setColumns(10);
-		this.contentPane.add(this.txtDefaultWidth);
 		
 		this.btnEnableTextSaving = new JButton("enable text saving");
 		this.btnEnableTextSaving.addMouseListener(new MouseAdapter() {
@@ -94,7 +90,7 @@ public class LogDialog extends JFrame {
 				Strings.saveLogText = true;
 			}
 		});
-		this.btnEnableTextSaving.setBounds(106, 10, 128, 23);
+		this.btnEnableTextSaving.setBounds(10, 11, 128, 23);
 		this.contentPane.add(this.btnEnableTextSaving);
 		
 		this.btnDisableTextSaving = new JButton("disable text saving");
@@ -104,7 +100,7 @@ public class LogDialog extends JFrame {
 				Strings.saveLogText = false;
 			}
 		});
-		this.btnDisableTextSaving.setBounds(106, 41, 128, 23);
+		this.btnDisableTextSaving.setBounds(10, 44, 128, 23);
 		this.contentPane.add(this.btnDisableTextSaving);
 	}
 	
@@ -112,11 +108,13 @@ public class LogDialog extends JFrame {
 	public void dispose() {
 		super.dispose();
 		
-		if (Strings.adminFrame != null) {
-			Strings.adminFrame.setEnabled(true);
+		if (Strings.isAdmin) {
+			if (Strings.adminFrame != null) {
+				Strings.adminFrame.setEnabled(true);
+			} 
 		} else if (Strings.userFrame != null) {
 			Strings.userFrame.setEnabled(true);
-		}
+		} 
 		
 		if (Strings.consoleFrame != null) {
 			Strings.consoleFrame.setEnabled(true);

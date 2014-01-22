@@ -31,7 +31,6 @@ public class ConsoleFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setSize(525, 325);
-		this.setVisible(true);
 				
 		// contentPane related inokes
 		this.contentPane = new JPanel();
@@ -73,6 +72,7 @@ public class ConsoleFrame extends JFrame {
 		this.contentPane.add(ConsoleFrame.textArea);
 		
 		this.checkAccessLevel();
+		this.setVisible(true);
 		
 	}
 

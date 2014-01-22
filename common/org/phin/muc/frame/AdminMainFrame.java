@@ -39,7 +39,6 @@ public class AdminMainFrame extends JFrame {
 		// general JFrame usage
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setVisible(true);
 		this.setAlwaysOnTop(false);
 		this.setEnabled(true);
 		this.setTitle("Admin Main Frame");
@@ -127,6 +126,8 @@ public class AdminMainFrame extends JFrame {
 		this.btnNetworkOptions = new JButton("network options");
 		this.btnNetworkOptions.setBounds(10, 442, 163, 38);
 		this.contentPane.add(this.btnNetworkOptions);
+		
+		this.setVisible(true);
 		
 	}
 

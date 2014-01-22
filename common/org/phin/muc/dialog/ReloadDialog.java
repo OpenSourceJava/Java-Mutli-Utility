@@ -11,17 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.util.ReloadHandler;
 
 public class ReloadDialog extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-
 	private JButton btnCancel;
-
 	private JButton btnOkay;
-
 	private JLabel lblLog;
 
 	public ReloadDialog() {
@@ -72,7 +70,7 @@ public class ReloadDialog extends JFrame {
 		this.btnOkay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO
+				ReloadHandler.reloadUI();
 			}
 		});
 		this.btnOkay.setBounds(195, 147, 89, 23);
