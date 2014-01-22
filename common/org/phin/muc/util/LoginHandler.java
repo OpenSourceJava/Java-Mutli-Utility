@@ -1,12 +1,13 @@
-package org.phin.mu.util;
+package org.phin.muc.util;
 
 import java.awt.Toolkit;
 
 import javax.security.auth.login.CredentialException;
 
-import org.phin.mu.frame.AdminMainFrame;
-import org.phin.mu.frame.ConsoleFrame;
-import org.phin.mu.lib.Strings;
+import org.phin.muc.frame.AdminMainFrame;
+import org.phin.muc.frame.ConsoleFrame;
+import org.phin.muc.frame.UserMainFrame;
+import org.phin.muc.lib.Strings;
 
 public class LoginHandler {
 	
@@ -22,8 +23,8 @@ public class LoginHandler {
 			Strings.isAdmin = false;
 			
 			// console creation
-			ConsoleFrame frame = new ConsoleFrame();
-			frame.setVisible(true);
+			Strings.consoleFrame = new ConsoleFrame();
+			Strings.userFrame = new UserMainFrame();
 			
 		} else {
 			Toolkit.getDefaultToolkit().beep();

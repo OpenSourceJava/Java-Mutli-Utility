@@ -1,6 +1,6 @@
-package org.phin.mu.util;
+package org.phin.muc.util;
 
-import org.phin.mu.lib.Strings;
+import org.phin.muc.lib.Strings;
 
 public class SystemHandler {
 	

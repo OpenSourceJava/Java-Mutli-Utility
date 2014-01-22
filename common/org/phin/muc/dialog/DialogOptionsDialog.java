@@ -1,4 +1,4 @@
-package org.phin.mu.dialog;
+package org.phin.muc.dialog;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
+import org.phin.muc.lib.Strings;
 
 public class DialogOptionsDialog extends JFrame {
 
@@ -40,6 +40,20 @@ public class DialogOptionsDialog extends JFrame {
 		this.setVisible(true);
 		this.setTitle("dialog options");
 		this.setLocationRelativeTo(null);
+		
+		if (Strings.isAdmin) {
+			if (Strings.adminFrame != null) {
+				Strings.adminFrame.setEnabled(false);
+			}
+		} else {
+			if (Strings.userFrame != null) {
+				Strings.userFrame.setEnabled(false);
+			}
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(false);
+		}
 		
 		// sets the dialogs size
 		this.setBounds(100, 100, 600, 600);
@@ -143,4 +157,21 @@ public class DialogOptionsDialog extends JFrame {
 		this.contentPane.add(this.btnDefaults);
 		
 	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		
+		if (Strings.adminFrame != null) {
+			Strings.adminFrame.setEnabled(true);
+		} else if (Strings.userFrame != null) {
+			Strings.userFrame.setEnabled(true);
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(true);
+		}
+		
+	}
+	
 }

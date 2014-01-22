@@ -1,4 +1,4 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
-import org.phin.mu.util.MenuHandler;
+import org.phin.muc.lib.Strings;
+import org.phin.muc.util.MenuHandler;
 
 public class AdminMainFrame extends JFrame {
 
@@ -71,8 +71,12 @@ public class AdminMainFrame extends JFrame {
 		this.btnMyComputer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ComputerFrame frame = new ComputerFrame();
-				frame.setVisible(true);
+				if (Strings.compFrame != null) {
+					Strings.compFrame.dispose();
+					Strings.compFrame = new ComputerFrame();
+				} else {
+					Strings.compFrame = new ComputerFrame();
+				}
 			}
 		});
 		this.btnMyComputer.setBounds(10, 11, 110, 38);
@@ -84,7 +88,7 @@ public class AdminMainFrame extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				// log handler
 				if (Strings.log != null) {
-					if (!Strings.log.getText().equals("")) {
+					if (Strings.saveLogText) {
 						final String text = Strings.log.getText();
 						Strings.log.dispose();
 						Strings.log = new LogFrame(text);
@@ -104,8 +108,12 @@ public class AdminMainFrame extends JFrame {
 		this.btnApplicationOptions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				AdminOptionsFrame frame = new AdminOptionsFrame();
-				frame.setVisible(true);
+				if (Strings.adminOptions != null) {
+					Strings.adminOptions.dispose();
+					Strings.adminOptions = new AdminOptionsFrame();
+				} else {
+					Strings.adminOptions = new AdminOptionsFrame();
+				}
 			}
 		});
 		this.btnApplicationOptions.setBounds(10, 393, 163, 38);

@@ -1,4 +1,4 @@
-package org.phin.mu.util;
+package org.phin.muc.util;
 
 import javax.swing.UIManager;
 

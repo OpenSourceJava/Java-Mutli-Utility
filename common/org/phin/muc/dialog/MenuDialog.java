@@ -1,4 +1,4 @@
-package org.phin.mu.dialog;
+package org.phin.muc.dialog;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
-import org.phin.mu.util.MenuHandler;
+import org.phin.muc.lib.Strings;
+import org.phin.muc.util.MenuHandler;
 
 public class MenuDialog extends JFrame {
 
@@ -57,6 +57,20 @@ public class MenuDialog extends JFrame {
 		this.setVisible(true);
 		this.setTitle("menu bar settings");
 		this.setLocationRelativeTo(null);
+		
+		if (Strings.isAdmin) {
+			if (Strings.adminFrame != null) {
+				Strings.adminFrame.setEnabled(false);
+			}
+		} else {
+			if (Strings.userFrame != null) {
+				Strings.userFrame.setEnabled(false);
+			}
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(false);
+		}
 		
 		// size
 		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
@@ -259,6 +273,22 @@ public class MenuDialog extends JFrame {
 		});
 		this.btnDisableWindowMenu.setBounds(10, 510, 154, 23);
 		this.contentPane.add(this.btnDisableWindowMenu);
+		
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		
+		if (Strings.adminFrame != null) {
+			Strings.adminFrame.setEnabled(true);
+		} else if (Strings.userFrame != null) {
+			Strings.userFrame.setEnabled(true);
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(true);
+		}
 		
 	}
 }

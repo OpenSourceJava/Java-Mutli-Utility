@@ -1,4 +1,4 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -16,10 +16,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Reference;
-import org.phin.mu.lib.Strings;
-import org.phin.mu.util.LAFHandler;
-import org.phin.mu.util.LoginHandler;
+import org.phin.muc.lib.Reference;
+import org.phin.muc.lib.Strings;
+import org.phin.muc.util.LAFHandler;
+import org.phin.muc.util.LoginHandler;
 
 public class LoginFrame extends JFrame {
 

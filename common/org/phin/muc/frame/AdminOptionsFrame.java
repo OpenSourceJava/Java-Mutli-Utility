@@ -1,4 +1,4 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.BorderLayout;
 
@@ -19,6 +19,7 @@ public class AdminOptionsFrame extends JFrame {
 	private void createGUI() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		this.setVisible(true);
 		this.setTitle("DO NAWT FEAR FOR JAVA IS HERE");
 		
 		contentPane = new JPanel();

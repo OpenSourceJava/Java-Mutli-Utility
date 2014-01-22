@@ -1,4 +1,4 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
-import org.phin.mu.util.SystemHandler;
+import org.phin.muc.lib.Strings;
+import org.phin.muc.util.SystemHandler;
 
 public class ComputerFrame extends JFrame {
 
@@ -46,26 +46,16 @@ public class ComputerFrame extends JFrame {
 	private JButton btnGetProcessors;
 	private JButton btnMaximumRam;
 	private JButton btnTotalRam;
-	private JButton btnRamDefinitions;
+	private JButton btnDefinitions;
 
 	public ComputerFrame() {
 		this.createGUI();
 	}
 	
 	private void createGUI() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(false);
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setTitle("My Computer");
-		this.setLocationRelativeTo(null);
-		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
-		
 		// log handler
 		if (Strings.log != null) {
-			if (!Strings.log.getText().equals("")) {
+			if (Strings.saveLogText) {
 				final String text = Strings.log.getText();
 				Strings.log.dispose();
 				Strings.log = new LogFrame(text);
@@ -76,6 +66,16 @@ public class ComputerFrame extends JFrame {
 		} else {
 			Strings.log = new LogFrame();
 		}
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setResizable(false);
+		this.setEnabled(true);
+		this.setVisible(true);
+		this.setTitle("My Computer");
+		this.setLocationRelativeTo(null);
+		
+		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
+		this.setSize(Strings.DEFAULT_DIM);
 		
 		// contentPane related invocations
 		this.contentPane = new JPanel();
@@ -390,8 +390,8 @@ public class ComputerFrame extends JFrame {
 		this.btnTotalRam.setBounds(312, 545, 141, 23);
 		this.contentPane.add(this.btnTotalRam);
 		
-		this.btnRamDefinitions = new JButton("RAM definitions");
-		this.btnRamDefinitions.addMouseListener(new MouseAdapter() {
+		this.btnDefinitions = new JButton("definitions");
+		this.btnDefinitions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Strings.log.print("RAM = Random Access Memory \n");
@@ -401,8 +401,8 @@ public class ComputerFrame extends JFrame {
 				Strings.log.print("GC or Grabage Collector = the JVMs way of freeing unused objects \n");
 			}
 		});
-		this.btnRamDefinitions.setBounds(312, 579, 141, 23);
-		this.contentPane.add(this.btnRamDefinitions);
+		this.btnDefinitions.setBounds(312, 579, 141, 23);
+		this.contentPane.add(this.btnDefinitions);
 		
 	}
 }

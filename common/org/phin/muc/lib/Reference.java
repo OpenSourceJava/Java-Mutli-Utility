@@ -1,4 +1,4 @@
-package org.phin.mu.lib;
+package org.phin.muc.lib;
 
 public class Reference {
 

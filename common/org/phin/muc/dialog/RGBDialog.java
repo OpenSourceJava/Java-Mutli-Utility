@@ -1,4 +1,4 @@
-package org.phin.mu.dialog;
+package org.phin.muc.dialog;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
-import org.phin.mu.util.ColorHandler;
+import org.phin.muc.lib.Strings;
+import org.phin.muc.util.ColorHandler;
 
 public class RGBDialog extends JFrame {
 
@@ -44,6 +44,20 @@ public class RGBDialog extends JFrame {
 		this.setTitle("backgroud color changer");
 		this.setLocationRelativeTo(null);
 	
+		if (Strings.isAdmin) {
+			if (Strings.adminFrame != null) {
+				Strings.adminFrame.setEnabled(false);
+			}
+		} else {
+			if (Strings.userFrame != null) {
+				Strings.userFrame.setEnabled(false);
+			}
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(false);
+		}
+		
 		this.setBounds(100, 100, Strings.DEFAULT_DIALOG_WIDTH, Strings.DEFAULT_DIALOG_HEIGHT);
 		this.setSize(Strings.DEFAULT_DIALOG_DIM);
 		
@@ -226,5 +240,21 @@ public class RGBDialog extends JFrame {
 		this.txtDialogBlue.setColumns(10);
 		this.contentPane.add(this.txtDialogBlue);
 	
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		
+		if (Strings.adminFrame != null) {
+			Strings.adminFrame.setEnabled(true);
+		} else if (Strings.userFrame != null) {
+			Strings.userFrame.setEnabled(true);
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(true);
+		}
+		
 	}
 }

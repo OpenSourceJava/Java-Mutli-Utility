@@ -1,13 +1,18 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
+import org.phin.muc.dialog.LogDialog;
+import org.phin.muc.lib.Strings;
 
 public class LogFrame extends JFrame {
 
@@ -15,6 +20,9 @@ public class LogFrame extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextArea textArea;
+	private JButton btnClear;
+	private JButton btnLogOptions;
+	private JLabel lbl1;
 	
 	public LogFrame() {
 		this.createGUI();
@@ -50,9 +58,38 @@ public class LogFrame extends JFrame {
 		this.setContentPane(this.contentPane);
 		
 		this.textArea = new JTextArea();
-		this.textArea.setBounds(10, 11, 725, 650);
+		this.textArea.setBounds(10, 11, 725, 616);
 		this.textArea.setEditable(false);
 		this.contentPane.add(this.textArea);
+		
+		this.btnClear = new JButton("Clear");
+		this.btnClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				textArea.setText("");
+			}
+		});
+		this.btnClear.setBounds(535, 638, 200, 23);
+		this.contentPane.add(this.btnClear);
+		
+		this.btnLogOptions = new JButton("log options");
+		this.btnLogOptions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (Strings.logDialog != null) {
+					Strings.logDialog.dispose();
+					Strings.logDialog = new LogDialog();
+				} else {
+					Strings.logDialog = new LogDialog();
+				}
+			}
+		});
+		this.btnLogOptions.setBounds(324, 638, 201, 23);
+		this.contentPane.add(this.btnLogOptions);
+		
+		this.lbl1 = new JLabel("when a console will not suffice ..........");
+		this.lbl1.setBounds(53, 642, 200, 14);
+		this.contentPane.add(this.lbl1);
 		
 	}
 	

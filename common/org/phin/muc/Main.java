@@ -1,10 +1,10 @@
-package org.phin.mu;
+package org.phin.muc;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import org.phin.mu.frame.LoginFrame;
+import org.phin.muc.frame.LoginFrame;
 
 public class Main {
 	

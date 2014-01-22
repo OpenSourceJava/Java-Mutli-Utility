@@ -1,4 +1,4 @@
-package org.phin.mu.frame;
+package org.phin.muc.frame;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.mu.lib.Strings;
+import org.phin.muc.lib.Strings;
 
 public class ConsoleFrame extends JFrame {
 

@@ -1,8 +1,7 @@
-package org.phin.mu.util;
+package org.phin.muc.util;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -11,16 +10,14 @@ import javax.swing.JMenuItem;
 
 import org.phin.cb1.frame.ChatBotFrame;
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
-import org.phin.mu.dialog.DialogOptionsDialog;
-import org.phin.mu.dialog.ExitDialog;
-import org.phin.mu.dialog.LogoutDialog;
-import org.phin.mu.dialog.MenuDialog;
-import org.phin.mu.dialog.RGBDialog;
-import org.phin.mu.frame.AdminMainFrame;
-import org.phin.mu.frame.ConsoleFrame;
-import org.phin.mu.frame.LogFrame;
-import org.phin.mu.frame.LoginFrame;
-import org.phin.mu.lib.Strings;
+import org.phin.muc.dialog.DialogOptionsDialog;
+import org.phin.muc.dialog.ExitDialog;
+import org.phin.muc.dialog.LogoutDialog;
+import org.phin.muc.dialog.MenuDialog;
+import org.phin.muc.dialog.RGBDialog;
+import org.phin.muc.frame.ConsoleFrame;
+import org.phin.muc.frame.LogFrame;
+import org.phin.muc.lib.Strings;
 
 public class MenuHandler {
 
@@ -29,7 +26,7 @@ public class MenuHandler {
 	
 	// JMenus
 	private JMenu fileMenu;
-	private JMenu helpMenu;
+	//private JMenu helpMenu; please leave me alone warnings </3 :'(
 	private JMenu appMenu;
 	private JMenu editMenu;
 	private JMenu windowMenu;
@@ -48,10 +45,10 @@ public class MenuHandler {
 	// App menu items
 	private JMenuItem calculator;
 	private JMenuItem chatBot;
-	private JMenuItem console;
 	
 	// window menu items
 	private JMenuItem showConsoleItem;
+	private JMenuItem startConsole;
 	
 	public final void initMenu(final JFrame frame) {
 		this.bar = new JMenuBar();
@@ -61,7 +58,7 @@ public class MenuHandler {
 		
 		// menu instantiations 
 		this.fileMenu = new JMenu("File");
-		this.helpMenu = new JMenu("Help");
+		//this.helpMenu = new JMenu("Help"); //////////////////////
 		this.appMenu = new JMenu ("Applications");
 		this.editMenu = new JMenu("Edit");
 		this.windowMenu = new JMenu("Window");
@@ -73,15 +70,17 @@ public class MenuHandler {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					if (Strings.logoutPrompt) {
-						JFrame dialog = new LogoutDialog();
-						dialog.setVisible(true);
+						if (Strings.logoutDialog != null) {
+							Strings.logoutDialog.dispose();
+							Strings.logoutDialog = new LogoutDialog();
+						} else {
+							Strings.logoutDialog = new LogoutDialog();
+						}
 					} else {
-						JFrame frame = new LoginFrame();
-						frame.setVisible(true);
-						
-						// disposes of the universal admin frame and the console frame
-						Strings.adminFrame.dispose();
-						Strings.consoleFrame.dispose();
+						if (Strings.consoleFrame != null) {
+							Strings.consoleFrame.dispose();
+							Strings.adminFrame.dispose();
+						}
 					}
 				}
 			});
@@ -91,11 +90,10 @@ public class MenuHandler {
 			this.reloadItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					try {
-						Runtime.getRuntime().exec("java -jar JMU.jar");
-						System.exit(0);
-					} catch (IOException e1) {
-						e1.printStackTrace();
+					if (Strings.reloadPrompt) {
+						// display prompt TODO
+					} else {
+						// reload TODO
 					}
 				}
 			});
@@ -107,8 +105,12 @@ public class MenuHandler {
 			this.menuItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					MenuDialog frame = new MenuDialog();
-					frame.setVisible(true);
+					if (Strings.menuDialog != null) {
+						Strings.menuDialog.dispose();
+						Strings.menuDialog = new MenuDialog();
+					} else {
+						Strings.menuDialog = new MenuDialog();
+					}
 				}
 			});
 			this.fileMenu.add(this.menuItem);
@@ -120,8 +122,12 @@ public class MenuHandler {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					if (Strings.exitPrompt) {
-						JFrame dialog = new ExitDialog();
-						dialog.setVisible(true);
+						if (Strings.exitDialog != null) {
+							Strings.exitDialog.dispose();
+							Strings.exitDialog = new ExitDialog();
+						} else {
+							Strings.exitDialog = new ExitDialog();
+						}
 					} else {
 						System.exit(0);
 					}
@@ -142,8 +148,12 @@ public class MenuHandler {
 			this.RGBItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					JFrame dialog = new RGBDialog();
-					dialog.setVisible(true);
+					if (Strings.rgbDialog != null) {
+						Strings.rgbDialog.dispose();
+						Strings.rgbDialog = new RGBDialog();
+					} else {
+						Strings.rgbDialog = new RGBDialog();
+					}
 				}
 			});
 			this.editMenu.add(this.RGBItem);
@@ -152,8 +162,12 @@ public class MenuHandler {
 			this.dialogItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					JFrame dialog = new DialogOptionsDialog();
-					dialog.setVisible(true);
+					if (Strings.dialogOptions != null) {
+						Strings.dialogOptions.dispose();
+						Strings.dialogOptions = new DialogOptionsDialog();
+					} else {
+						Strings.dialogOptions = new DialogOptionsDialog();
+					}
 				}
 			});
 			this.editMenu.add(this.dialogItem);
@@ -200,27 +214,46 @@ public class MenuHandler {
 			});
 			this.appMenu.add(this.chatBot);
 			
-			this.console = new JMenuItem("Console");
-			this.console.addMouseListener(new MouseAdapter() {
+			// adds app menu to the menu bar
+			this.bar.add(this.appMenu);
+			
+		}
+			
+		// WINDOW MENU -----------------------------------------------------------
+		if (Strings.windowMenu) {
+			this.startConsole = new JMenuItem("Console");
+			this.startConsole.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					if (Strings.consoleFrame != null) {
 						Strings.consoleFrame.dispose();
 						Strings.consoleFrame = new ConsoleFrame();
+					} else {
+						Strings.consoleFrame = new ConsoleFrame();
 					}
 				}
 			});
-			this.appMenu.add(this.console);
+			this.windowMenu.add(this.startConsole);
 			
-			// adds app menu to the menu bar
-			this.bar.add(this.appMenu);
+			this.showConsoleItem = new JMenuItem("Console Options");
+			this.showConsoleItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO
+				}
+			});
+			this.windowMenu.add(this.showConsoleItem);
+			
+			// adds the window menu to the menu bar
+			this.bar.add(this.windowMenu);
 		}
 		
+		// ----------------------------------------------------------------------------
 	}
 	
 	public static void getMenuAsAdmin() {
 		if (Strings.log != null) {
-			if (!Strings.log.getText().equals("")) {
+			if ((Strings.saveLogText) && (!Strings.log.getText().equals(""))) {
 				final String text = Strings.log.getText();
 				Strings.log.dispose();
 				Strings.log = new LogFrame(text);

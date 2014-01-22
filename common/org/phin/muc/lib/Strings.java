@@ -1,12 +1,24 @@
-package org.phin.mu.lib;
+package org.phin.muc.lib;
 
 import java.awt.Dimension;
 
 import org.phin.cb1.frame.ChatBotFrame;
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
-import org.phin.mu.frame.AdminMainFrame;
-import org.phin.mu.frame.ConsoleFrame;
-import org.phin.mu.frame.LogFrame;
+import org.phin.muc.dialog.DialogOptionsDialog;
+import org.phin.muc.dialog.DisableFileDialog;
+import org.phin.muc.dialog.DisableMenuDialog;
+import org.phin.muc.dialog.ExitDialog;
+import org.phin.muc.dialog.LogDialog;
+import org.phin.muc.dialog.LogoutDialog;
+import org.phin.muc.dialog.MenuDialog;
+import org.phin.muc.dialog.RGBDialog;
+import org.phin.muc.frame.AdminMainFrame;
+import org.phin.muc.frame.AdminOptionsFrame;
+import org.phin.muc.frame.ComputerFrame;
+import org.phin.muc.frame.ConsoleFrame;
+import org.phin.muc.frame.LogFrame;
+import org.phin.muc.frame.LoginFrame;
+import org.phin.muc.frame.UserMainFrame;
 
 public class Strings {
 	
@@ -23,7 +35,7 @@ public class Strings {
 	public static final String ADMIN_PASSWORD = "password123;";
 	
 	public static final String USERNAME_1 = "leroy46";
-	public static final String PASSWORD_1 = "suagar12;";
+	public static final String PASSWORD_1 = "sugar12;";
 	
 	 // if true the user is a admin otherwise the user is not
 	public static boolean isAdmin = false;
@@ -51,10 +63,26 @@ public class Strings {
 
 	// universal frames for managing what is open where easily 
 	public static AdminMainFrame adminFrame;
+	public static AdminOptionsFrame adminOptions;
+	public static ComputerFrame compFrame;
+	public static LoginFrame loginFrame;
 	public static ConsoleFrame consoleFrame;
+	public static LogFrame log;
+	public static UserMainFrame userFrame;
+	
+	// global apps
 	public static BasicCalculatorFrame calculator;
 	public static ChatBotFrame chatBot;
-	public static LogFrame log;
+	
+	// universal dialogs
+	public static LogDialog logDialog;
+	public static LogoutDialog logoutDialog;
+	public static DialogOptionsDialog dialogOptions;
+	public static DisableFileDialog disableFile;
+	public static DisableMenuDialog disableMenu;
+	public static ExitDialog exitDialog;
+	public static MenuDialog menuDialog;
+	public static RGBDialog rgbDialog;
 	
 	// menu bar values
 	// this allows users to determine which menuBars to enable or disable
@@ -65,5 +93,8 @@ public class Strings {
 	public static boolean helpMenu = true;
 	public static boolean appMenu = true;
 	public static boolean windowMenu = true;
+	
+	// save text value
+	public static boolean saveLogText = true;
 	
 }
