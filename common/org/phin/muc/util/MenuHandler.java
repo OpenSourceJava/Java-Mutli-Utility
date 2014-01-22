@@ -15,6 +15,7 @@ import org.phin.muc.dialog.ExitDialog;
 import org.phin.muc.dialog.LogoutDialog;
 import org.phin.muc.dialog.MenuDialog;
 import org.phin.muc.dialog.RGBDialog;
+import org.phin.muc.dialog.ReloadDialog;
 import org.phin.muc.frame.ConsoleFrame;
 import org.phin.muc.frame.LogFrame;
 import org.phin.muc.lib.Strings;
@@ -91,7 +92,12 @@ public class MenuHandler {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					if (Strings.reloadPrompt) {
-						// display prompt TODO
+						if (Strings.reloadDialog != null) {
+							Strings.reloadDialog.dispose();
+							Strings.reloadDialog = new ReloadDialog();
+						} else {
+							Strings.reloadDialog = new ReloadDialog();
+						}
 					} else {
 						// reload TODO
 					}

@@ -12,6 +12,7 @@ import org.phin.muc.dialog.LogDialog;
 import org.phin.muc.dialog.LogoutDialog;
 import org.phin.muc.dialog.MenuDialog;
 import org.phin.muc.dialog.RGBDialog;
+import org.phin.muc.dialog.ReloadDialog;
 import org.phin.muc.frame.AdminMainFrame;
 import org.phin.muc.frame.AdminOptionsFrame;
 import org.phin.muc.frame.ComputerFrame;
@@ -83,6 +84,7 @@ public class Strings {
 	public static ExitDialog exitDialog;
 	public static MenuDialog menuDialog;
 	public static RGBDialog rgbDialog;
+	public static ReloadDialog reloadDialog;
 	
 	// menu bar values
 	// this allows users to determine which menuBars to enable or disable

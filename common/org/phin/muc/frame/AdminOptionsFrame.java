@@ -20,7 +20,7 @@ public class AdminOptionsFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.setVisible(true);
-		this.setTitle("DO NAWT FEAR FOR JAVA IS HERE");
+		this.setTitle("not implemented yet");
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
