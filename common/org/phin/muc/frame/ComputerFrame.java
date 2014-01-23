@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.SystemHandler;
 
 public class ComputerFrame extends JFrame {
@@ -54,17 +55,17 @@ public class ComputerFrame extends JFrame {
 	
 	private void createGUI() {
 		// log handler
-		if (Strings.log != null) {
-			if (Strings.saveLogText) {
-				final String text = Strings.log.getText();
-				Strings.log.dispose();
-				Strings.log = new LogFrame(text);
+		if (Strings.messageFrame != null) {
+			if (UserSettings.saveLogText) {
+				final String text = Strings.messageFrame.getText();
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame(text);
 			} else {
-				Strings.log.dispose();
-				Strings.log = new LogFrame();
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame();
 			}
 		} else {
-			Strings.log = new LogFrame();
+			Strings.messageFrame = new LogFrame();
 		}
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,8 +84,8 @@ public class ComputerFrame extends JFrame {
 		this.contentPane.setLayout(null);
 		
 		// Apply the background color
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.LIGHT_GRAY);
 		}
@@ -135,7 +136,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("java.version");
-				Strings.log.print("java version = " + string + "\n");
+				Strings.messageFrame.print("java version = " + string + "\n");
 			}
 		});
 		this.btnJavaVersion.setBounds(10, 349, 141, 23);
@@ -146,7 +147,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("java.vendor.url");
-				Strings.log.print("java vendor url = " + string + "\n");
+				Strings.messageFrame.print("java vendor url = " + string + "\n");
 			}
 		});
 		this.btnJavaVendorUrl.setBounds(10, 383, 141, 23);
@@ -157,7 +158,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("java.vendor");
-				Strings.log.print("java vendor = " + string + "\n");
+				Strings.messageFrame.print("java vendor = " + string + "\n");
 			}
 		});
 		this.btnJavaVendor.setBounds(10, 417, 141, 23);
@@ -168,7 +169,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("os.arch");
-				Strings.log.print("system architecture = " + string + "\n");
+				Strings.messageFrame.print("system architecture = " + string + "\n");
 			}
 		});
 		this.btnSystemArchetecture.setBounds(10, 511, 141, 23);
@@ -179,7 +180,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("os.name");
-				Strings.log.print("system name = " + string + "\n");
+				Strings.messageFrame.print("system name = " + string + "\n");
 			}
 		});
 		this.btnOsName.setBounds(10, 545, 141, 23);
@@ -190,7 +191,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("os.version");
-				Strings.log.print("system version = " + string + "\n");
+				Strings.messageFrame.print("system version = " + string + "\n");
 			}
 		});
 		this.btnOsVersion.setBounds(10, 579, 141, 23);
@@ -201,7 +202,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("java.home");
-				Strings.log.print("java install directory = " + string + "\n");
+				Strings.messageFrame.print("java install directory = " + string + "\n");
 			}
 		});
 		this.btnJavaInstallDirectory.setBounds(10, 452, 141, 23);
@@ -213,7 +214,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("user.dir");
-				Strings.log.print("user working directory  = " + string + "\n");
+				Strings.messageFrame.print("user working directory  = " + string + "\n");
 			}
 		});
 		this.btnUserWD.setBounds(161, 349, 153, 23);
@@ -225,7 +226,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("user.home");
-				Strings.log.print("users home directory  = " + string + "\n");
+				Strings.messageFrame.print("users home directory  = " + string + "\n");
 			}
 		});
 		this.btnUsersHD.setBounds(161, 383, 133, 23);
@@ -236,7 +237,7 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string = System.getProperty("user.name");
-				Strings.log.print("users name  = " + string + "\n");
+				Strings.messageFrame.print("users name  = " + string + "\n");
 			}
 		});
 		this.btnUserName.setBounds(161, 417, 133, 23);
@@ -247,16 +248,16 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string1 = System.getProperty("java.version");
-				Strings.log.print("java version = " + string1 + "\n");
+				Strings.messageFrame.print("java version = " + string1 + "\n");
 				
 				String string2 = System.getProperty("java.vendor.url");
-				Strings.log.print("java vendor url = " + string2 + "\n");
+				Strings.messageFrame.print("java vendor url = " + string2 + "\n");
 				
 				String string3 = System.getProperty("java.vendor");
-				Strings.log.print("java vendor = " + string3 + "\n");
+				Strings.messageFrame.print("java vendor = " + string3 + "\n");
 				
 				String string4 = System.getProperty("java.home");
-				Strings.log.print("java install directory = " + string4 + "\n");
+				Strings.messageFrame.print("java install directory = " + string4 + "\n");
 			}
 		});
 		this.btnListJavaProps.setBounds(10, 638, 125, 23);
@@ -267,13 +268,13 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string1 = System.getProperty("user.dir");
-				Strings.log.print("user working directory  = " + string1 + "\n");
+				Strings.messageFrame.print("user working directory  = " + string1 + "\n");
 				
 				String string2 = System.getProperty("user.home");
-				Strings.log.print("users home directory  = " + string2 + "\n");
+				Strings.messageFrame.print("users home directory  = " + string2 + "\n");
 				
 				String string = System.getProperty("user.name");
-				Strings.log.print("users name  = " + string + "\n");
+				Strings.messageFrame.print("users name  = " + string + "\n");
 			}
 		});
 		this.btnListUserProps.setBounds(145, 638, 133, 23);
@@ -284,13 +285,13 @@ public class ComputerFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String string1 = System.getProperty("os.name");
-				Strings.log.print("system name  = " + string1 + "\n");
+				Strings.messageFrame.print("system name  = " + string1 + "\n");
 				
 				String string2 = System.getProperty("os.version");
-				Strings.log.print("system version  = " + string2 + "\n");
+				Strings.messageFrame.print("system version  = " + string2 + "\n");
 				
 				String string3 = System.getProperty("os.arch");
-				Strings.log.print("system architecture  = " + string3 + "\n");
+				Strings.messageFrame.print("system architecture  = " + string3 + "\n");
 			}
 		});
 		this.btnListSystemProps.setBounds(288, 638, 133, 23);
@@ -394,11 +395,11 @@ public class ComputerFrame extends JFrame {
 		this.btnDefinitions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.log.print("RAM = Random Access Memory \n");
-				Strings.log.print("JVM = Java Virtual Machine \n");
-				Strings.log.print("Total RAM = total ram in the JVM \n");
-				Strings.log.print("max RAM = most RAM the JVM will ever attempt to use \n");
-				Strings.log.print("GC or Grabage Collector = the JVMs way of freeing unused objects \n");
+				Strings.messageFrame.print("RAM = Random Access Memory \n");
+				Strings.messageFrame.print("JVM = Java Virtual Machine \n");
+				Strings.messageFrame.print("Total RAM = total ram in the JVM \n");
+				Strings.messageFrame.print("max RAM = most RAM the JVM will ever attempt to use \n");
+				Strings.messageFrame.print("GC or Grabage Collector = the JVMs way of freeing unused objects \n");
 			}
 		});
 		this.btnDefinitions.setBounds(312, 579, 141, 23);

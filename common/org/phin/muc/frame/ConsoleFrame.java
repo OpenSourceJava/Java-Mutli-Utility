@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 
 public class ConsoleFrame extends JFrame {
 
@@ -38,8 +39,8 @@ public class ConsoleFrame extends JFrame {
 		this.contentPane.setLayout(null);
 		this.setContentPane(this.contentPane);
 		
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.LIGHT_GRAY);
 		}

@@ -10,15 +10,16 @@ import javax.swing.JMenuItem;
 
 import org.phin.cb1.frame.ChatBotFrame;
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
-import org.phin.muc.dialog.DialogOptionsDialog;
 import org.phin.muc.dialog.ExitDialog;
 import org.phin.muc.dialog.LogoutDialog;
-import org.phin.muc.dialog.MenuDialog;
-import org.phin.muc.dialog.RGBDialog;
 import org.phin.muc.dialog.ReloadDialog;
+import org.phin.muc.dialog.options.DialogPromptOptions;
+import org.phin.muc.dialog.options.MenuBarOptions;
+import org.phin.muc.dialog.options.RGBOptions;
 import org.phin.muc.frame.ConsoleFrame;
 import org.phin.muc.frame.LogFrame;
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 
 public class MenuHandler {
 
@@ -68,23 +69,16 @@ public class MenuHandler {
 		this.windowMenu = new JMenu("Window");
 		
 		// FILE MENU -----------------------------------------------------------
-		if (Strings.fileMenu) {
+		if (UserSettings.fileMenu) {
 			this.logoutItem = new JMenuItem("Logout");
 			this.logoutItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.logoutPrompt) {
-						if (Strings.logoutDialog != null) {
-							Strings.logoutDialog.dispose();
-							Strings.logoutDialog = new LogoutDialog();
-						} else {
-							Strings.logoutDialog = new LogoutDialog();
-						}
+					if (UserSettings.logoutPrompt) {
+						LogoutDialog dialog = new LogoutDialog();
+						dialog.setVisible(true);
 					} else {
-						if (Strings.consoleFrame != null) {
-							Strings.consoleFrame.dispose();
-							Strings.adminFrame.dispose();
-						}
+						LoginHandler.logout();
 					}
 				}
 			});
@@ -94,13 +88,9 @@ public class MenuHandler {
 			this.reloadItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.reloadPrompt) {
-						if (Strings.reloadDialog != null) {
-							Strings.reloadDialog.dispose();
-							Strings.reloadDialog = new ReloadDialog();
-						} else {
-							Strings.reloadDialog = new ReloadDialog();
-						}
+					if (UserSettings.reloadPrompt) {
+						ReloadDialog dialog = new ReloadDialog();
+						dialog.setVisible(true);
 					} else {
 						ReloadHandler.reloadUI();
 					}
@@ -114,12 +104,8 @@ public class MenuHandler {
 			this.menuItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.menuDialog != null) {
-						Strings.menuDialog.dispose();
-						Strings.menuDialog = new MenuDialog();
-					} else {
-						Strings.menuDialog = new MenuDialog();
-					}
+					MenuBarOptions option = new MenuBarOptions();
+					option.setVisible(true);
 				}
 			});
 			this.fileMenu.add(this.menuItem);
@@ -130,13 +116,9 @@ public class MenuHandler {
 			this.exitItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.exitPrompt) {
-						if (Strings.exitDialog != null) {
-							Strings.exitDialog.dispose();
-							Strings.exitDialog = new ExitDialog();
-						} else {
-							Strings.exitDialog = new ExitDialog();
-						}
+					if (UserSettings.exitPrompt) {
+						ExitDialog dialog = new ExitDialog();
+						dialog.setVisible(true);
 					} else {
 						System.exit(0);
 					}
@@ -151,18 +133,14 @@ public class MenuHandler {
 		}
 		
 		// EDIT MENU -----------------------------------------------------------
-		if (Strings.editMenu) {
+		if (UserSettings.editMenu) {
 			// edit menu related things
 			this.RGBItem = new JMenuItem("RGB");
 			this.RGBItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.rgbDialog != null) {
-						Strings.rgbDialog.dispose();
-						Strings.rgbDialog = new RGBDialog();
-					} else {
-						Strings.rgbDialog = new RGBDialog();
-					}
+					RGBOptions option = new RGBOptions();
+					option.setVisible(true);
 				}
 			});
 			this.editMenu.add(this.RGBItem);
@@ -171,12 +149,8 @@ public class MenuHandler {
 			this.dialogItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (Strings.dialogOptions != null) {
-						Strings.dialogOptions.dispose();
-						Strings.dialogOptions = new DialogOptionsDialog();
-					} else {
-						Strings.dialogOptions = new DialogOptionsDialog();
-					}
+					DialogPromptOptions option = new DialogPromptOptions();
+					option.setVisible(true);
 				}
 			});
 			this.editMenu.add(this.dialogItem);
@@ -194,7 +168,7 @@ public class MenuHandler {
 		}
 		
 		// APP MENU -----------------------------------------------------------
-		if (Strings.appMenu) {
+		if (UserSettings.appMenu) {
 			this.calculator = new JMenuItem("Calculator");
 			this.calculator.addMouseListener(new MouseAdapter() {
 				@Override
@@ -229,7 +203,7 @@ public class MenuHandler {
 		}
 			
 		// WINDOW MENU -----------------------------------------------------------
-		if (Strings.windowMenu) {
+		if (UserSettings.windowMenu) {
 			this.startConsole = new JMenuItem("Console");
 			this.startConsole.addMouseListener(new MouseAdapter() {
 				@Override
@@ -273,56 +247,56 @@ public class MenuHandler {
 	}
 	
 	public static void getMenuAsAdmin() {
-		if (Strings.log != null) {
-			if ((Strings.saveLogText) && (!Strings.log.getText().equals(""))) {
-				final String text = Strings.log.getText();
-				Strings.log.dispose();
-				Strings.log = new LogFrame(text);
-				Strings.log.setLocationRelativeTo(Strings.adminFrame);
+		if (Strings.messageFrame != null) {
+			if ((UserSettings.saveLogText) && (!Strings.messageFrame.getText().equals(""))) {
+				final String text = Strings.messageFrame.getText();
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame(text);
+				Strings.messageFrame.setLocationRelativeTo(Strings.adminFrame);
 			} else {
-				Strings.log.dispose();
-				Strings.log = new LogFrame();
-				Strings.log.setLocationRelativeTo(Strings.adminFrame);
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame();
+				Strings.messageFrame.setLocationRelativeTo(Strings.adminFrame);
 			}
 		} else {
-			Strings.log = new LogFrame();
-			Strings.log.setLocationRelativeTo(Strings.adminFrame);
+			Strings.messageFrame = new LogFrame();
+			Strings.messageFrame.setLocationRelativeTo(Strings.adminFrame);
 		}
 		
-		if (Strings.menuBar) {
-			Strings.log.print("the menu bar is enabled \n");
+		if (UserSettings.menuBar) {
+			Strings.messageFrame.print("the menu bar is enabled \n");
 		} else {
-			Strings.log.print("the menu bar is disabled \n");
+			Strings.messageFrame.print("the menu bar is disabled \n");
 		}
 		
-		if (Strings.fileMenu) {
-			Strings.log.print("the file menu is enabled \n");
+		if (UserSettings.fileMenu) {
+			Strings.messageFrame.print("the file menu is enabled \n");
 		} else {
-			Strings.log.print("the file menu is disabled \n");
+			Strings.messageFrame.print("the file menu is disabled \n");
 		}
 		
-		if (Strings.editMenu) {
-			Strings.log.print("the edit menu is enabled \n");
+		if (UserSettings.editMenu) {
+			Strings.messageFrame.print("the edit menu is enabled \n");
 		} else {
-			Strings.log.print("the edit menu is disabled \n");
+			Strings.messageFrame.print("the edit menu is disabled \n");
+		}
+			
+		if (UserSettings.helpMenu) {
+			Strings.messageFrame.print("the help menu is enabled \n");
+		} else {
+			Strings.messageFrame.print("the help menu is disabled \n");
 		}
 		
-		if (Strings.helpMenu) {
-			Strings.log.print("the help menu is enabled \n");
+		if (UserSettings.appMenu) {
+			Strings.messageFrame.print("the app menu is enabled \n");
 		} else {
-			Strings.log.print("the help menu is disabled \n");
+			Strings.messageFrame.print("the app menu is disabled \n");
 		}
 		
-		if (Strings.appMenu) {
-			Strings.log.print("the app menu is enabled \n");
+		if (UserSettings.windowMenu) {
+			Strings.messageFrame.print("the window menu is enabled \n");
 		} else {
-			Strings.log.print("the app menu is disabled \n");
-		}
-		
-		if (Strings.windowMenu) {
-			Strings.log.print("the window menu is enabled \n");
-		} else {
-			Strings.log.print("the window menu is disabled \n");
+			Strings.messageFrame.print("the window menu is disabled \n");
 		}
 		
 	}

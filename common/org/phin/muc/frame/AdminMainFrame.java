@@ -1,7 +1,6 @@
 package org.phin.muc.frame;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.MenuHandler;
 
 public class AdminMainFrame extends JFrame {
@@ -22,7 +22,7 @@ public class AdminMainFrame extends JFrame {
 	private MenuHandler handler;
 	private JButton btnMyComputer;
 
-	private Component btnLog;
+	private JButton btnLog;
 	private JButton btnApplicationOptions;
 	private JLabel label;
 	private JButton btnNetworkOptions;
@@ -45,7 +45,7 @@ public class AdminMainFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		// menu init
-		if (Strings.menuBar) {
+		if (UserSettings.menuBar) {
 			this.handler = new MenuHandler();
 			this.handler.initMenu(this);
 		} else {
@@ -58,8 +58,8 @@ public class AdminMainFrame extends JFrame {
 		this.contentPane.setLayout(null);
 		
 		// Apply the background color
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.LIGHT_GRAY);
 		}
@@ -86,17 +86,17 @@ public class AdminMainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// log handler
-				if (Strings.log != null) {
-					if (Strings.saveLogText) {
-						final String text = Strings.log.getText();
-						Strings.log.dispose();
-						Strings.log = new LogFrame(text);
+				if (Strings.messageFrame != null) {
+					if (UserSettings.saveLogText) {
+						final String text = Strings.messageFrame.getText();
+						Strings.messageFrame.dispose();
+						Strings.messageFrame = new LogFrame(text);
 					} else {
-						Strings.log.dispose();
-						Strings.log = new LogFrame();
+						Strings.messageFrame.dispose();
+						Strings.messageFrame = new LogFrame();
 					}
 				} else {
-					Strings.log = new LogFrame();
+					Strings.messageFrame = new LogFrame();
 				}
 			}
 		});

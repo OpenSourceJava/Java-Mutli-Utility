@@ -54,8 +54,8 @@ public class ReloadHandler {
 			Strings.loginFrame.dispose();
 		}
 		
-		if (Strings.log != null) {
-			Strings.log.dispose();
+		if (Strings.messageFrame != null) {
+			Strings.messageFrame.dispose();
 		}
 		
 		if (Strings.calculator != null) {

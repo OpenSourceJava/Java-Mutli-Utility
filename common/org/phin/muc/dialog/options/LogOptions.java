@@ -1,4 +1,4 @@
-package org.phin.muc.dialog;
+package org.phin.muc.dialog.options;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -10,8 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 
-public class LogDialog extends JFrame {
+public class LogOptions extends JFrame {
 
 	private static final long serialVersionUID = 1;
 	
@@ -21,7 +22,7 @@ public class LogDialog extends JFrame {
 	private JButton btnEnableTextSaving;
 	private JButton btnDisableTextSaving;
 
-	public LogDialog() {
+	public LogOptions() {
 		this.createGUI();
 	}
 	
@@ -42,6 +43,8 @@ public class LogDialog extends JFrame {
 			}
 		}
 		
+		Strings.messageFrame.setEnabled(false);
+		
 		if (Strings.consoleFrame != null) {
 			Strings.consoleFrame.setEnabled(false);
 		}
@@ -55,8 +58,8 @@ public class LogDialog extends JFrame {
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		// Apply the background color
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.DARK_GRAY);
 		}
@@ -67,7 +70,7 @@ public class LogDialog extends JFrame {
 		this.btnRevert.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.saveLogText = true;
+				UserSettings.saveLogText = true;
 			}
 		});
 		this.btnRevert.setBounds(146, 148, 89, 23);
@@ -87,7 +90,7 @@ public class LogDialog extends JFrame {
 		this.btnEnableTextSaving.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.saveLogText = true;
+				UserSettings.saveLogText = true;
 			}
 		});
 		this.btnEnableTextSaving.setBounds(10, 11, 128, 23);
@@ -97,29 +100,11 @@ public class LogDialog extends JFrame {
 		this.btnDisableTextSaving.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.saveLogText = false;
+				UserSettings.saveLogText = false;
 			}
 		});
 		this.btnDisableTextSaving.setBounds(10, 44, 128, 23);
 		this.contentPane.add(this.btnDisableTextSaving);
 	}
-	
-	@Override
-	public void dispose() {
-		super.dispose();
 		
-		if (Strings.isAdmin) {
-			if (Strings.adminFrame != null) {
-				Strings.adminFrame.setEnabled(true);
-			} 
-		} else if (Strings.userFrame != null) {
-			Strings.userFrame.setEnabled(true);
-		} 
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(true);
-		}
-		
-	}
-	
 }

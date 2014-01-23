@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Reference;
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.LAFHandler;
 import org.phin.muc.util.LoginHandler;
 
@@ -64,8 +65,8 @@ public class LoginFrame extends JFrame {
 		this.contentPane.setBackground(Color.LIGHT_GRAY);
 		this.setContentPane(this.contentPane);
 		
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.LIGHT_GRAY);
 		}

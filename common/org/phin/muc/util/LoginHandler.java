@@ -6,6 +6,7 @@ import javax.security.auth.login.CredentialException;
 
 import org.phin.muc.frame.AdminMainFrame;
 import org.phin.muc.frame.ConsoleFrame;
+import org.phin.muc.frame.LoginFrame;
 import org.phin.muc.frame.UserMainFrame;
 import org.phin.muc.lib.Strings;
 
@@ -30,6 +31,45 @@ public class LoginHandler {
 			Toolkit.getDefaultToolkit().beep();
 			throw new CredentialException();
 		}
+	}
+	
+	public static void logout() {
+		if (Strings.isAdmin) {
+			if (Strings.adminOptions != null) {
+				Strings.adminOptions.dispose();
+			}
+			
+			if (Strings.compFrame != null) {
+				Strings.compFrame.dispose();
+			}
+			
+			Strings.adminFrame.dispose();
+		
+		} else {
+			if (Strings.userFrame != null) {
+				Strings.userFrame.dispose();
+			}
+		}
+		
+		if (Strings.messageFrame != null) {
+			Strings.messageFrame.dispose();
+		}
+		
+		if (Strings.calculator != null) {
+			Strings.calculator.dispose();
+		}
+		
+		if (Strings.chatBot != null) {
+			Strings.chatBot.dispose();
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.dispose();
+		}
+		
+		LoginFrame frame = new LoginFrame();
+		frame.setVisible(true);
+		
 	}
 
 }

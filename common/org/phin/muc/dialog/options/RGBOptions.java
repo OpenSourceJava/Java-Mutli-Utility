@@ -1,4 +1,4 @@
-package org.phin.muc.dialog;
+package org.phin.muc.dialog.options;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -12,9 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.ColorHandler;
 
-public class RGBDialog extends JFrame {
+public class RGBOptions extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -31,7 +32,7 @@ public class RGBDialog extends JFrame {
 	private JTextField txtDialogGreen;
 	private JTextField txtDialogBlue;
 
-	public RGBDialog() {
+	public RGBOptions() {
 		this.createGUI();
 	}
 	
@@ -68,8 +69,8 @@ public class RGBDialog extends JFrame {
 		this.setContentPane(this.contentPane);
 		
 		// sets the dialogs background color
-		if ((Strings.DIALOG_RED != 0) && (Strings.DIALOG_GREEN != 0) && (Strings.DIALOG_BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.DIALOG_RED, Strings.DIALOG_GREEN, Strings.DIALOG_BLUE));  
+		if ((UserSettings.DIALOG_RED != 0) && (UserSettings.DIALOG_GREEN != 0) && (UserSettings.DIALOG_BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.DIALOG_RED, UserSettings.DIALOG_GREEN, UserSettings.DIALOG_BLUE));  
 		} else {
 			this.contentPane.setBackground(Color.DARK_GRAY);
 		}
@@ -87,13 +88,14 @@ public class RGBDialog extends JFrame {
 				txtDialogGreen.setText("Dialog Green");
 				txtJavaColors.setText("Java Colors");
 				
-				Strings.BLUE = 0;
-				Strings.RED = 0;
-				Strings.GREEN = 0;
+				UserSettings.BLUE = 0;
+				UserSettings.RED = 0;
+				UserSettings.GREEN = 0;
 				
-				Strings.DIALOG_BLUE = 0;
-				Strings.DIALOG_GREEN = 0;
-				Strings.DIALOG_RED = 0;
+				UserSettings.DIALOG_BLUE = 0;
+				UserSettings.DIALOG_GREEN = 0;
+				UserSettings.DIALOG_RED = 0;
+				
 			}
 		});
 		this.btnRevert.setBounds(60, 148, 90, 25);
@@ -109,9 +111,9 @@ public class RGBDialog extends JFrame {
 					green = Integer.parseInt(txtGreen.getText());
 					blue = Integer.parseInt(txtBlue.getText());
 					
-					Strings.BLUE = blue;
-					Strings.RED = red;
-					Strings.GREEN = green;
+					UserSettings.BLUE = blue;
+					UserSettings.RED = red;
+					UserSettings.GREEN = green;
 				} 
 				
 				if (!txtDialogRed.getText().equals("Dialog Red") && (!txtDialogGreen.getText().equals("Dialog Green") && (!txtDialogBlue.getText().equals("Dialog Blue")))) {
@@ -120,9 +122,9 @@ public class RGBDialog extends JFrame {
 					green = Integer.parseInt(txtDialogGreen.getText());
 					blue = Integer.parseInt(txtDialogBlue.getText());
 					
-					Strings.DIALOG_BLUE = blue;
-					Strings.DIALOG_RED = red;
-					Strings.DIALOG_GREEN = green;
+					UserSettings.DIALOG_BLUE = blue;
+					UserSettings.DIALOG_RED = red;
+					UserSettings.DIALOG_GREEN = green;
 				} 
 				
 				if (!txtJavaColors.getText().equals("Java Colors")) {

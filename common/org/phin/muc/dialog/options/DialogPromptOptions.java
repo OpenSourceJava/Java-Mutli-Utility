@@ -1,18 +1,17 @@
-package org.phin.muc.dialog;
+package org.phin.muc.dialog.options;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.lib.Strings;
+import org.phin.muc.dialog.MultiUtilityDialog;
+import org.phin.muc.lib.UserSettings;
 
-public class DialogOptionsDialog extends JFrame {
+public class DialogPromptOptions extends MultiUtilityDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -28,50 +27,30 @@ public class DialogOptionsDialog extends JFrame {
 	private JButton btnEnableExit;
 	private JButton btnDefaults;
 	
-	public DialogOptionsDialog() {
+	public DialogPromptOptions() {
 		this.createGUI();
 	}
 	
+	@Override
 	protected void createGUI() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(false);
-		this.setAlwaysOnTop(true);
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setTitle("dialog options");
-		this.setLocationRelativeTo(null);
+		// call the super createGUI
+		super.createGUI();
 		
-		if (Strings.isAdmin) {
-			if (Strings.adminFrame != null) {
-				Strings.adminFrame.setEnabled(false);
-			}
-		} else {
-			if (Strings.userFrame != null) {
-				Strings.userFrame.setEnabled(false);
-			}
-		}
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(false);
-		}
+		// title set
+		super.setTitle("dialog options");
 		
 		// sets the dialogs size
-		this.setBounds(100, 100, 600, 600);
-		this.setSize(600, 600);
+		super.setBounds(100, 100, 600, 600);
+		super.setSize(600, 600);
 		
 		// contentPane related things
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		this.setContentPane(this.contentPane);
+		super.setDialogColor(this.contentPane);
+		super.setContentPane(this.contentPane);
 		
-		// sets the dialogs background color
-		if ((Strings.DIALOG_RED != 0) && (Strings.DIALOG_GREEN != 0) && (Strings.DIALOG_BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.DIALOG_RED, Strings.DIALOG_GREEN, Strings.DIALOG_BLUE));  
-		} else {
-			this.contentPane.setBackground(Color.DARK_GRAY);
-		}
-		
+		// components -----------------------------------------------------------------------
 		this.lblInfo2 = new JLabel("choose wether or not a dialog appears when you click components");
 		this.lblInfo2.setBounds(10, 11, 324, 25);
 		this.contentPane.add(this.lblInfo2);
@@ -80,7 +59,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnEnableExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.exitPrompt = true;
+				UserSettings.exitPrompt = true;
 			}
 		});
 		this.btnEnableExit.setBounds(10, 47, 123, 23);
@@ -90,7 +69,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnDisableExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.exitPrompt = false;
+				UserSettings.exitPrompt = false;
 			}
 		});
 		this.btnDisableExit.setBounds(10, 81, 123, 23);
@@ -100,7 +79,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnEnableLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.logoutPrompt = true;
+				UserSettings.logoutPrompt = true;
 			}
 		});
 		this.btnEnableLogout.setBounds(10, 140, 151, 23);
@@ -110,7 +89,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnDisableLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.logoutPrompt = false;
+				UserSettings.logoutPrompt = false;
 			}
 		});
 		this.btnDisableLogout.setBounds(10, 174, 151, 23);
@@ -128,7 +107,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnEnableReload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.reloadPrompt = true;
+				UserSettings.reloadPrompt = true;
 			}
 		});
 		this.btnEnableReload.setBounds(10, 233, 133, 23); 
@@ -138,7 +117,7 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnDisableReload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.reloadPrompt = false;
+				UserSettings.reloadPrompt = false;
 			}
 		});
 		this.btnDisableReload.setBounds(10, 267, 133, 23);
@@ -148,29 +127,17 @@ public class DialogOptionsDialog extends JFrame {
 		this.btnDefaults.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.exitPrompt = true;
-				Strings.reloadPrompt = false;
-				Strings.logoutPrompt = true;
+				UserSettings.exitPrompt = true;
+				UserSettings.reloadPrompt = false;
+				UserSettings.logoutPrompt = true;
 			}
 		});
 		this.btnDefaults.setBounds(10, 540, 89, 23);
 		this.contentPane.add(this.btnDefaults);
 		
-	}
-	
-	@Override
-	public void dispose() {
-		super.dispose();
-		
-		if (Strings.adminFrame != null) {
-			Strings.adminFrame.setEnabled(true);
-		} else if (Strings.userFrame != null) {
-			Strings.userFrame.setEnabled(true);
-		}
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(true);
-		}
+		// loads all components before showing the frame
+		super.setLocationRelativeTo(null);
+		super.setVisible(true);
 		
 	}
 	

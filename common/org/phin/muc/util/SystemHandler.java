@@ -15,25 +15,25 @@ public class SystemHandler {
 		String megaByteRamS = String.valueOf(megaByteRam);
 		String gigaByteRamS = String.valueOf(gigaByteRam);
 		
-		Strings.log.print("RAM in the JVM");
-		Strings.log.print("ram in Bytes = " + byteRamS + "\n");
-		Strings.log.print("ram in Kilo Bytes = " + kiloByteRamS + "\n");
-		Strings.log.print("ram in Mega Bytes = " + megaByteRamS + "\n");
-		Strings.log.print("ram in Giga Bytes = " + gigaByteRamS + "\n");
+		Strings.messageFrame.print("RAM in the JVM");
+		Strings.messageFrame.print("ram in Bytes = " + byteRamS + "\n");
+		Strings.messageFrame.print("ram in Kilo Bytes = " + kiloByteRamS + "\n");
+		Strings.messageFrame.print("ram in Mega Bytes = " + megaByteRamS + "\n");
+		Strings.messageFrame.print("ram in Giga Bytes = " + gigaByteRamS + "\n");
 		
 	}
 	
 	public static void runGC() {
-		Strings.log.print("running... \n");
+		Strings.messageFrame.print("running... \n");
 		Runtime.getRuntime().gc();
-		Strings.log.print("done... \n");
+		Strings.messageFrame.print("done... \n");
 	}
 
 	public static void getProcessors() {
 		int proc = Runtime.getRuntime().availableProcessors();
 		String string = String.valueOf(proc);
 		
-		Strings.log.print("processors available to the JVM = " + string + "\n");
+		Strings.messageFrame.print("processors available to the JVM = " + string + "\n");
 	}
 
 	public static void getMaxRAM() {
@@ -47,10 +47,10 @@ public class SystemHandler {
 		String megaByteRamS = String.valueOf(megaByteRam);
 		String gigaByteRamS = String.valueOf(gigaByteRam);
 		
-		Strings.log.print("max RAM in the JVM = " + byteRamS + " bytes \n");
-		Strings.log.print("max RAM in the JVM = " + kiloByteRamS + " kilo bytes \n");
-		Strings.log.print("max RAM in the JVM = " + megaByteRamS + " mega bytes \n");
-		Strings.log.print("max RAM in the JVM = " + gigaByteRamS + " giga bytes \n");
+		Strings.messageFrame.print("max RAM in the JVM = " + byteRamS + " bytes \n");
+		Strings.messageFrame.print("max RAM in the JVM = " + kiloByteRamS + " kilo bytes \n");
+		Strings.messageFrame.print("max RAM in the JVM = " + megaByteRamS + " mega bytes \n");
+		Strings.messageFrame.print("max RAM in the JVM = " + gigaByteRamS + " giga bytes \n");
 		
 	}
 	
@@ -65,10 +65,10 @@ public class SystemHandler {
 		String megaByteRamS = String.valueOf(megaByteRam);
 		String gigaByteRamS = String.valueOf(gigaByteRam);
 		
-		Strings.log.print("total RAM in the JVM = " + byteRamS + " bytes \n");
-		Strings.log.print("total RAM in the JVM = " + kiloByteRamS + " kilo bytes \n");
-		Strings.log.print("total RAM in the JVM = " + megaByteRamS + " mega bytes \n");
-		Strings.log.print("total RAM in the JVM = " + gigaByteRamS + " giga bytes \n");
+		Strings.messageFrame.print("total RAM in the JVM = " + byteRamS + " bytes \n");
+		Strings.messageFrame.print("total RAM in the JVM = " + kiloByteRamS + " kilo bytes \n");
+		Strings.messageFrame.print("total RAM in the JVM = " + megaByteRamS + " mega bytes \n");
+		Strings.messageFrame.print("total RAM in the JVM = " + gigaByteRamS + " giga bytes \n");
 		
 	}
 	

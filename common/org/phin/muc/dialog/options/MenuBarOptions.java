@@ -1,7 +1,6 @@
-package org.phin.muc.dialog;
+package org.phin.muc.dialog.options;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,17 +12,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.phin.muc.dialog.DisableFileDialog;
+import org.phin.muc.dialog.DisableMenuDialog;
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.MenuHandler;
 
-public class MenuDialog extends JFrame {
+public class MenuBarOptions extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
 
-	private Component btnDisableMenuBar;
-
+	private JButton btnDisableMenuBar;
 	private JButton btnEnableMenuBar;
 	private JButton btnDefaults;
 	private JLabel label;
@@ -45,7 +46,7 @@ public class MenuDialog extends JFrame {
 	private JButton btnEnableWindowMenu;
 	private JButton btnDisableWindowMenu;
 
-	public MenuDialog() {
+	public MenuBarOptions() {
 		this.createGUI();
 	}
 	
@@ -82,8 +83,8 @@ public class MenuDialog extends JFrame {
 		this.contentPane.setLayout(null);
 		
 		// sets the dialogs background color
-		if ((Strings.DIALOG_RED != 0) && (Strings.DIALOG_GREEN != 0) && (Strings.DIALOG_BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.DIALOG_RED, Strings.DIALOG_GREEN, Strings.DIALOG_BLUE));  
+		if ((UserSettings.DIALOG_RED != 0) && (UserSettings.DIALOG_GREEN != 0) && (UserSettings.DIALOG_BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.DIALOG_RED, UserSettings.DIALOG_GREEN, UserSettings.DIALOG_BLUE));  
 		} else {
 			this.contentPane.setBackground(Color.DARK_GRAY);
 		}
@@ -94,7 +95,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableMenuBar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.menuBar = true;
+				UserSettings.menuBar = true;
 			}
 		});
 		this.btnEnableMenuBar.setBounds(10, 11, 154, 23);
@@ -114,12 +115,12 @@ public class MenuDialog extends JFrame {
 		this.btnDefaults = new JButton("defaults");
 		this.btnDefaults.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Strings.menuBar = true;
-				Strings.fileMenu = true;
-				Strings.editMenu = true;
-				Strings.helpMenu = true;
-				Strings.windowMenu = true;
-				Strings.appMenu = true;
+				UserSettings.menuBar = true;
+				UserSettings.fileMenu = true;
+				UserSettings.editMenu = true;
+				UserSettings.helpMenu = true;
+				UserSettings.windowMenu = true;
+				UserSettings.appMenu = true;
 			}
 		});
 		this.btnDefaults.setBounds(462, 628, 131, 30);
@@ -133,7 +134,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableFileMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.fileMenu = true;
+				UserSettings.fileMenu = true;
 			}
 		});
 		this.btnEnableFileMenu.setBounds(10, 104, 154, 23);
@@ -158,7 +159,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableEditMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.editMenu = true;
+				UserSettings.editMenu = true;
 			}
 		});
 		this.btnEnableEditMenu.setBounds(10, 197, 154, 23);
@@ -168,7 +169,7 @@ public class MenuDialog extends JFrame {
 		this.btnDisableEditMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.editMenu = false;
+				UserSettings.editMenu = false;
 			}
 		});
 		this.btnDisableEditMenu.setBounds(10, 231, 154, 23);
@@ -182,7 +183,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableHelpMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.helpMenu = true;
+				UserSettings.helpMenu = true;
 			}
 		});
 		this.btnEnableHelpMenu.setBounds(10, 290, 154, 23);
@@ -192,7 +193,7 @@ public class MenuDialog extends JFrame {
 		this.btnDisableHelpMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.helpMenu = false;
+				UserSettings.helpMenu = false;
 			}
 		});
 		this.btnDisableHelpMenu.setBounds(10, 324, 154, 23);
@@ -234,7 +235,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableAppMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.appMenu = true;
+				UserSettings.appMenu = true;
 			}
 		});
 		this.btnEnableAppMenu.setBounds(10, 383, 154, 23);
@@ -244,7 +245,7 @@ public class MenuDialog extends JFrame {
 		this.btnDisableAppMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.appMenu = false;
+				UserSettings.appMenu = false;
 			}
 		});
 		this.btnDisableAppMenu.setBounds(10, 417, 154, 23);
@@ -258,7 +259,7 @@ public class MenuDialog extends JFrame {
 		this.btnEnableWindowMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.windowMenu = true;
+				UserSettings.windowMenu = true;
 			}
 		});
 		this.btnEnableWindowMenu.setBounds(10, 476, 154, 23);
@@ -268,7 +269,7 @@ public class MenuDialog extends JFrame {
 		this.btnDisableWindowMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Strings.windowMenu = false;
+				UserSettings.windowMenu = false;
 			}
 		});
 		this.btnDisableWindowMenu.setBounds(10, 510, 154, 23);

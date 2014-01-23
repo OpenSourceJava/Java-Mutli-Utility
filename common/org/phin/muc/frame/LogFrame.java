@@ -11,8 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.dialog.LogDialog;
+import org.phin.muc.dialog.options.LogOptions;
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 
 public class LogFrame extends JFrame {
 
@@ -49,8 +50,8 @@ public class LogFrame extends JFrame {
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		// Apply the background color
-		if ((Strings.RED != 0) && (Strings.GREEN != 0) && (Strings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(Strings.RED, Strings.GREEN, Strings.BLUE));
+		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
+			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
 		} else {
 			this.contentPane.setBackground(Color.DARK_GRAY);
 		}
@@ -76,12 +77,8 @@ public class LogFrame extends JFrame {
 		this.btnLogOptions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (Strings.logDialog != null) {
-					Strings.logDialog.dispose();
-					Strings.logDialog = new LogDialog();
-				} else {
-					Strings.logDialog = new LogDialog();
-				}
+				LogOptions option = new LogOptions();
+				option.setVisible(true);
 			}
 		});
 		this.btnLogOptions.setBounds(324, 638, 201, 23);
@@ -100,4 +97,5 @@ public class LogFrame extends JFrame {
 	public String getText() {
 		return this.textArea.getText();
 	}
+	
 }
