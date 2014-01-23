@@ -4,7 +4,7 @@ a Java swing application that will have many other 'embedded' features inside of
 a bunch of other tools in it. Feel free to reference and use this code as you like
 as long as you follow the rules of the GPL v3, please read the LEGAL.txt for more on this.
 
-update 1.1 Alpha is basically re-factored the code for the dialogs and separated user set variables from the core application ones.
+update 1.1 Alpha is basically re-factored code for the dialogs and the separated user set variables from the core application ones.
 
 note the App is still in its core development and has hardly any features at this particular point in time.
 
