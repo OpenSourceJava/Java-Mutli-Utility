@@ -15,7 +15,7 @@ download links :
 
 Java-Multi-Utility 1.0 Alpha: http://goo.gl/NjXP5x
 
-Java-Multi-Utility 1.1 Alpha: http://goo.gl/85f7RC
+Java-Multi-Utility 1.1 Alpha: http://goo.gl/oUWpYF
 
 
 login:
