@@ -11,8 +11,8 @@ the current username is: admin
 
 the current password is : password123;
 
-version 1.1 is now available not a huge update feature wise but fixed and refacered almost all
-the dialogs
+version 1.1 is now available not a huge update feature wise but fixed and refactered all
+the dialogs and and other code.
 
 downloads:
 
