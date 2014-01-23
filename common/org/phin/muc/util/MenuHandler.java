@@ -8,8 +8,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import org.phin.cb1.frame.ChatBotFrame;
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
+import org.phin.muc.dialog.AboutDialog;
 import org.phin.muc.dialog.ExitDialog;
 import org.phin.muc.dialog.LogoutDialog;
 import org.phin.muc.dialog.ReloadDialog;
@@ -46,7 +46,6 @@ public class MenuHandler {
 	
 	// App menu items
 	private JMenuItem calculator;
-	private JMenuItem chatBot;
 	
 	// window menu items
 	private JMenuItem showConsoleItem;
@@ -183,20 +182,6 @@ public class MenuHandler {
 			});
 			this.appMenu.add(this.calculator);
 			
-			this.chatBot = new JMenuItem("Chat Bot");
-			this.chatBot.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if (Strings.chatBot != null) {
-						Strings.chatBot.dispose();
-						Strings.chatBot = new ChatBotFrame();
-					} else {
-						Strings.chatBot = new ChatBotFrame();
-					}
-				}
-			});
-			this.appMenu.add(this.chatBot);
-			
 			// adds app menu to the menu bar
 			this.bar.add(this.appMenu);
 			
@@ -236,7 +221,8 @@ public class MenuHandler {
 		this.aboutItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// display about dialog
+				AboutDialog dialog = new AboutDialog();
+				dialog.setVisible(true);
 			}
 		});
 		this.helpMenu.add(this.aboutItem);

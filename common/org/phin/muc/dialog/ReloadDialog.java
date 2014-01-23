@@ -43,6 +43,7 @@ public class ReloadDialog extends MultiUtilityDialog {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				ReloadHandler.reloadUI();
+				dispose();
 			}
 		});
 		this.btnOkay.setBounds(195, 147, 89, 23);

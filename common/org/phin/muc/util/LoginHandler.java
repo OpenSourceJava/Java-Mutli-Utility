@@ -59,10 +59,6 @@ public class LoginHandler {
 			Strings.calculator.dispose();
 		}
 		
-		if (Strings.chatBot != null) {
-			Strings.chatBot.dispose();
-		}
-		
 		if (Strings.consoleFrame != null) {
 			Strings.consoleFrame.dispose();
 		}

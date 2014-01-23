@@ -62,9 +62,5 @@ public class ReloadHandler {
 			Strings.calculator.dispose();
 		}
 		
-		if (Strings.chatBot != null) {
-			Strings.chatBot.dispose();
-		}
-		
 	}
 }

@@ -2,7 +2,6 @@ package org.phin.muc.lib;
 
 import java.awt.Dimension;
 
-import org.phin.cb1.frame.ChatBotFrame;
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
 import org.phin.muc.frame.AdminMainFrame;
 import org.phin.muc.frame.AdminOptionsFrame;
@@ -46,7 +45,6 @@ public class Strings {
 	
 	// global apps
 	public static BasicCalculatorFrame calculator;
-	public static ChatBotFrame chatBot;
 	
 	// if true the user is a admin otherwise the user is not
 	// be default and for obvious reasons the default is false.

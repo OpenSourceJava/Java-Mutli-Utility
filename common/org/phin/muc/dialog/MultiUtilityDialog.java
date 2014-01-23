@@ -73,10 +73,6 @@ public class MultiUtilityDialog extends JFrame {
 			Strings.calculator.setEnabled(true);
 		}
 		
-		if (Strings.chatBot != null) {
-			Strings.chatBot.setEnabled(true);
-		}
-		
 		if (Strings.consoleFrame != null) {
 			Strings.consoleFrame.setEnabled(true);
 		}
@@ -114,10 +110,6 @@ public class MultiUtilityDialog extends JFrame {
 		
 		if (Strings.calculator != null) {
 			Strings.calculator.setEnabled(false);
-		}
-		
-		if (Strings.chatBot != null) {
-			Strings.chatBot.setEnabled(false);
 		}
 		
 		if (Strings.consoleFrame != null) {
