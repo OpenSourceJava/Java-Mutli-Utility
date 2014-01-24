@@ -7,21 +7,4 @@ A bunch of other tools inside it. Feel free to reference and use this code as yo
 Update 1.1 Alpha is basically re-factored code for the dialogs and the separated user set variables from the core application ones.
 
 
-note the App is still in its core development and has hardly any features at this particular point in time.
-
-
-download links :
-
-
-Java-Multi-Utility 1.0 Alpha: http://goo.gl/NjXP5x
-
-Java-Multi-Utility 1.1 Alpha: http://goo.gl/oUWpYF
-
-
-login:
-
-
-the current user-name is: admin 
-
-
-the current password is : password123;
+Once the app stabilizes i will release a download link :)
