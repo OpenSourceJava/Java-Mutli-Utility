@@ -383,6 +383,7 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnDefinitions.setBounds(312, 579, 141, 23);
 		this.contentPane.add(this.btnDefinitions);
 
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		
 	}
