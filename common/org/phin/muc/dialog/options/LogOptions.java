@@ -1,72 +1,45 @@
 package org.phin.muc.dialog.options;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.lib.Strings;
+import org.phin.muc.dialog.MultiUtilityDialog;
 import org.phin.muc.lib.UserSettings;
+import javax.swing.JRadioButton;
 
-public class LogOptions extends JFrame {
+public class LogOptions extends MultiUtilityDialog {
 
 	private static final long serialVersionUID = 1;
 	
 	private JPanel contentPane;
 	private JButton btnOkay;
 	private JButton btnRevert;
-	private JButton btnEnableTextSaving;
-	private JButton btnDisableTextSaving;
+	private JRadioButton rBtnSaveText;
 
 	public LogOptions() {
 		this.createGUI();
 	}
 	
-	private void createGUI() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle("log options");
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setResizable(false);
-		
-		if (Strings.isAdmin) {
-			if (Strings.adminFrame != null) {
-				Strings.adminFrame.setEnabled(false);
-			}
-		} else {
-			if (Strings.userFrame != null) {
-				Strings.userFrame.setEnabled(false);
-			}
-		}
-		
-		Strings.messageFrame.setEnabled(false);
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(false);
-		}
-		
-		this.setBounds(100, 100, Strings.DEFAULT_DIALOG_WIDTH, Strings.DEFAULT_DIALOG_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIALOG_DIM);
-		
-		// contentPane
+	@Override
+	protected void createGUI() {
+		// call the super createGUI
+		super.createGUI();
+				
+		// title set
+		super.setTitle("Log options");
+				
+		// contentPane related things
 		this.contentPane = new JPanel();
-		this.contentPane.setLayout(null);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(null);
+		super.colorInit(this.contentPane);
+		super.setContentPane(this.contentPane);
 		
-		// Apply the background color
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.DARK_GRAY);
-		}
-		
-		this.setContentPane(this.contentPane);
-		
-		this.btnRevert = new JButton("revert");
+		this.btnRevert = new JButton("Revert");
 		this.btnRevert.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -76,7 +49,7 @@ public class LogOptions extends JFrame {
 		this.btnRevert.setBounds(146, 148, 89, 23);
 		this.contentPane.add(this.btnRevert);
 		
-		this.btnOkay = new JButton("okay");
+		this.btnOkay = new JButton("Okay");
 		this.btnOkay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -86,25 +59,26 @@ public class LogOptions extends JFrame {
 		this.btnOkay.setBounds(245, 148, 89, 23);
 		this.contentPane.add(this.btnOkay);
 		
-		this.btnEnableTextSaving = new JButton("enable text saving");
-		this.btnEnableTextSaving.addMouseListener(new MouseAdapter() {
+		this.rBtnSaveText = new JRadioButton("Save Text on Log Exit");
+		this.rBtnSaveText.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				UserSettings.saveLogText = true;
+				if (UserSettings.saveLogText) {
+					UserSettings.saveLogText = false;
+				} else {
+					UserSettings.saveLogText = true;
+				}
 			}
 		});
-		this.btnEnableTextSaving.setBounds(10, 11, 128, 23);
-		this.contentPane.add(this.btnEnableTextSaving);
+		this.rBtnSaveText.setBounds(6, 7, 166, 42);
+		this.contentPane.add(this.rBtnSaveText);
 		
-		this.btnDisableTextSaving = new JButton("disable text saving");
-		this.btnDisableTextSaving.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				UserSettings.saveLogText = false;
-			}
-		});
-		this.btnDisableTextSaving.setBounds(10, 44, 128, 23);
-		this.contentPane.add(this.btnDisableTextSaving);
+		if (UserSettings.saveLogText) {
+			this.rBtnSaveText.doClick();
+		}
+		
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 		
 }

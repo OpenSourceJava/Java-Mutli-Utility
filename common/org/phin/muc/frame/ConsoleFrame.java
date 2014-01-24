@@ -1,20 +1,19 @@
 package org.phin.muc.frame;
 
-import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
-import org.phin.muc.lib.UserSettings;
 
-public class ConsoleFrame extends JFrame {
+public class ConsoleFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,25 +26,22 @@ public class ConsoleFrame extends JFrame {
 		this.createGUI();
 	}
 	
-	private void createGUI() {		
-		// other invokes
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(false);
-		this.setSize(525, 325);
-				
+	@Override
+	protected void createGUI() {		
+		super.createGUI();
+		super.setTitle("Console");
+		
+		super.setBounds(100, 100, 525, 325);
+		super.setSize(525, 325);
+		
 		// contentPane related inokes
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
+		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
 		
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.LIGHT_GRAY);
-		}
-		
-		this.btnEnter = new JButton("enter");
+		this.btnEnter = new JButton("Enter");
 		this.btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -62,6 +58,18 @@ public class ConsoleFrame extends JFrame {
 		this.contentPane.add(this.btnEnter);
 		
 		this.textField = new JTextField();
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (Strings.isAdmin) {
+					// implement command handler
+				} else {
+					textArea.append("sorry you dont have sufficient user privileges \n"); 
+					textArea.append("to access the console commands \n");
+					throw new SecurityException();
+				}
+			}
+		});
 		this.textField.setBounds(10, 264, 400, 20);
 		this.textField.setColumns(10);
 		this.contentPane.add(this.textField);
@@ -92,4 +100,5 @@ public class ConsoleFrame extends JFrame {
 	public static void printMessage(String message) {
 		ConsoleFrame.textArea.append(message);
 	}
+	
 }

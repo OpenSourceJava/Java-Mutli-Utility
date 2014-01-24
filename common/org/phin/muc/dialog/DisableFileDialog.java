@@ -36,7 +36,7 @@ public class DisableFileDialog extends MultiUtilityDialog {
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		super.setDialogColor(this.contentPane);
+		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
 		this.info1 = new JLabel("disabling the file menu can be irreversible with out a app restart");
@@ -70,6 +70,7 @@ public class DisableFileDialog extends MultiUtilityDialog {
 		
 		// loads all components before showing the frame
 		super.setLocationRelativeTo(null);
+		super.toFront();
 		super.setVisible(true);
 		
 	}

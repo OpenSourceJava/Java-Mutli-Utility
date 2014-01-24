@@ -1,21 +1,17 @@
 package org.phin.muc.frame;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.dialog.options.LogOptions;
-import org.phin.muc.lib.Strings;
-import org.phin.muc.lib.UserSettings;
 
-public class LogFrame extends JFrame {
+public class LogFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,32 +30,20 @@ public class LogFrame extends JFrame {
 		this.textArea.setText(text);
 	}
 	
-	private void createGUI() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle("log");
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setResizable(false);
+	@Override
+	protected void createGUI() {
+		super.createGUI();
+		super.setTitle("Log");
 		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
-		
-		// contentPane
+		// contentPane related inokes
 		this.contentPane = new JPanel();
-		this.contentPane.setLayout(null);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-		// Apply the background color
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.DARK_GRAY);
-		}
-		
+		this.contentPane.setLayout(null);
+		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
 		
 		this.textArea = new JTextArea();
-		this.textArea.setBounds(10, 11, 725, 616);
+		this.textArea.setBounds(10, 11, 674, 616);
 		this.textArea.setEditable(false);
 		this.contentPane.add(this.textArea);
 		
@@ -70,7 +54,7 @@ public class LogFrame extends JFrame {
 				textArea.setText("");
 			}
 		});
-		this.btnClear.setBounds(535, 638, 200, 23);
+		this.btnClear.setBounds(490, 638, 194, 23);
 		this.contentPane.add(this.btnClear);
 		
 		this.btnLogOptions = new JButton("log options");
@@ -81,12 +65,15 @@ public class LogFrame extends JFrame {
 				option.setVisible(true);
 			}
 		});
-		this.btnLogOptions.setBounds(324, 638, 201, 23);
+		this.btnLogOptions.setBounds(279, 638, 201, 23);
 		this.contentPane.add(this.btnLogOptions);
 		
 		this.lbl1 = new JLabel("when a console will not suffice ..........");
 		this.lbl1.setBounds(53, 642, 200, 14);
 		this.contentPane.add(this.lbl1);
+		
+		super.setLocationRelativeTo(null);
+		super.setVisible(true);
 		
 	}
 	

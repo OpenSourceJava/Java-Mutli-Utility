@@ -1,5 +1,9 @@
 package org.phin.muc.dialog;
 
+import static org.phin.muc.lib.UserSettings.DIALOG_BLUE;
+import static org.phin.muc.lib.UserSettings.DIALOG_GREEN;
+import static org.phin.muc.lib.UserSettings.DIALOG_RED;
+
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -8,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.phin.muc.lib.Strings;
-import org.phin.muc.lib.UserSettings;
 
 public class MultiUtilityDialog extends JFrame {
 
@@ -120,22 +123,18 @@ public class MultiUtilityDialog extends JFrame {
 	}
 	
 	/**
-	 * sets the color of the contentPane/
+	 * you must call this on your own
 	 * 
-	 * <p>
-	 * note this is not used in this class its only here to serve
-	 * as a simple way to manage the background color.
-	 * </p>
-	 * 
-	 * @param contentPane the contentPane for the color to be set to
+	 * @param contentPane your classes contentPane / JPanel
 	 * 
 	 */
-	protected void setDialogColor(JPanel contentPane) {
-		if ((UserSettings.DIALOG_RED != 0) && (UserSettings.DIALOG_GREEN != 0) && (UserSettings.DIALOG_BLUE != 0)) {
-			contentPane.setBackground(new Color(UserSettings.DIALOG_RED, UserSettings.DIALOG_GREEN, UserSettings.DIALOG_BLUE));  
+	protected void colorInit(JPanel contentPane) {
+		if ((((DIALOG_RED <= 255 && DIALOG_RED >= 0)) && (DIALOG_GREEN <= 255 && DIALOG_GREEN >= 0) && (DIALOG_BLUE <= 255 && DIALOG_BLUE >= 0))) {
+			contentPane.setBackground(new Color(DIALOG_RED, DIALOG_GREEN, DIALOG_BLUE));
 		} else {
-			contentPane.setBackground(Color.DARK_GRAY);
+			contentPane.setBackground(Color.LIGHT_GRAY);
 		}
+		
 	}
 
 }

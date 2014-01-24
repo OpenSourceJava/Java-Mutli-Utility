@@ -47,7 +47,7 @@ public class DialogPromptOptions extends MultiUtilityDialog {
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		super.setDialogColor(this.contentPane);
+		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
 		// components -----------------------------------------------------------------------

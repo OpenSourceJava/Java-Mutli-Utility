@@ -57,8 +57,11 @@ public class MenuHandler {
 	public final void initMenu(final JFrame frame) {
 		this.bar = new JMenuBar();
 		
-		// sets the frames menu bar
-		frame.setJMenuBar(this.bar);
+		if (UserSettings.menuBar) {
+			frame.setJMenuBar(this.bar);
+		} else {
+			ConsoleFrame.printMessage("warning: menu bar is disabled \n");
+		}
 		
 		// menu instantiations 
 		this.fileMenu = new JMenu("File");
@@ -144,7 +147,7 @@ public class MenuHandler {
 			});
 			this.editMenu.add(this.RGBItem);
 			
-			this.dialogItem = new JMenuItem("Dialog box Options");
+			this.dialogItem = new JMenuItem("Dialog Box Options");
 			this.dialogItem.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -164,6 +167,8 @@ public class MenuHandler {
 			
 			// adds edit menu to the menu bar
 			this.bar.add(this.editMenu);
+		} else {
+			ConsoleFrame.printMessage("warning: edit menu is disabled \n");
 		}
 		
 		// APP MENU -----------------------------------------------------------
@@ -185,6 +190,8 @@ public class MenuHandler {
 			// adds app menu to the menu bar
 			this.bar.add(this.appMenu);
 			
+		} else {
+			ConsoleFrame.printMessage("warning: app menu is disabled \n");
 		}
 			
 		// WINDOW MENU -----------------------------------------------------------
@@ -214,20 +221,26 @@ public class MenuHandler {
 			
 			// adds the window menu to the menu bar
 			this.bar.add(this.windowMenu);
+		} else {
+			ConsoleFrame.printMessage("warning: window menu is disabled \n");
 		}
 		
 		// HELP MENU -----------------------------------------------------------
-		this.aboutItem = new JMenuItem("about");
-		this.aboutItem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				AboutDialog dialog = new AboutDialog();
-				dialog.setVisible(true);
-			}
-		});
-		this.helpMenu.add(this.aboutItem);
-		
-		this.bar.add(this.helpMenu);
+		if (UserSettings.helpMenu) {
+			this.aboutItem = new JMenuItem("about");
+			this.aboutItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					AboutDialog dialog = new AboutDialog();
+					dialog.setVisible(true);
+				}
+			});
+			this.helpMenu.add(this.aboutItem);
+			
+			this.bar.add(this.helpMenu);
+		} else {
+			ConsoleFrame.printMessage("warning: help menu is disabled \n");
+		}
 		
 		// ----------------------------------------------------------------------------
 	}

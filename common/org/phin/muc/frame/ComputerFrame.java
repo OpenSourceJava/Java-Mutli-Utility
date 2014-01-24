@@ -1,29 +1,32 @@
 package org.phin.muc.frame;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
-import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.SystemHandler;
 
-public class ComputerFrame extends JFrame {
+public class ComputerFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	// contentPane
 	private JPanel contentPane;
+	
+	// labels
 	private JLabel lblInfo1;
-	private JButton btnCMD;
-	private JButton btnPS;
 	private JLabel separator1;
+	private JLabel lblInfo3;
+	private JLabel lblInfo2;
+	private JLabel label;
+	
+	// buttons
 	private JButton btnJavaVersion;
 	private JButton btnJavaInstallDirectory;
 	private JButton btnOsVersion;
@@ -37,67 +40,42 @@ public class ComputerFrame extends JFrame {
 	private JButton btnListJavaProps;
 	private JButton btnListUserProps;
 	private JButton btnListSystemProps;
-	private JLabel lblInfo3;
-	private JButton btnStartNotepad;
-	private JButton btnRegedit;
-	private JLabel lblInfo2;
-	private JLabel label;
 	private JButton btnFreeRam;
 	private JButton btnRunGarbageCollector;
 	private JButton btnGetProcessors;
 	private JButton btnMaximumRam;
 	private JButton btnTotalRam;
 	private JButton btnDefinitions;
-
+	private JButton btnStartNotepad;
+	private JButton btnRegedit;
+	private JButton btnCMD;
+	private JButton btnPS;
+	
 	public ComputerFrame() {
 		this.createGUI();
 	}
 	
-	private void createGUI() {
-		// log handler
-		if (Strings.messageFrame != null) {
-			if (UserSettings.saveLogText) {
-				final String text = Strings.messageFrame.getText();
-				Strings.messageFrame.dispose();
-				Strings.messageFrame = new LogFrame(text);
-			} else {
-				Strings.messageFrame.dispose();
-				Strings.messageFrame = new LogFrame();
-			}
-		} else {
-			Strings.messageFrame = new LogFrame();
-		}
-		
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(false);
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setTitle("My Computer");
-		this.setLocationRelativeTo(null);
-		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
-		
+	@Override
+	protected void createGUI() {
+		// create gui
+		super.createGUI();
+		super.setTitle("My Computer");
+
 		// contentPane related invocations
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		
-		// Apply the background color
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.LIGHT_GRAY);
-		}
-		
+		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
 		
-		this.lblInfo1 = new JLabel("windows functions");
+		//this.initLogFrame();
+		
+		this.lblInfo1 = new JLabel("Windows Functions");
 		this.lblInfo1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		this.lblInfo1.setBounds(20, 11, 141, 28);
 		this.contentPane.add(this.lblInfo1);
 		
-		this.btnCMD = new JButton("start command prompt");
+		this.btnCMD = new JButton("Start Command Prompt");
 		this.btnCMD.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -109,7 +87,7 @@ public class ComputerFrame extends JFrame {
 				}
 			}
 		});
-		this.btnCMD.setBounds(10, 50, 141, 23);
+		this.btnCMD.setBounds(10, 50, 151, 23);
 		this.contentPane.add(this.btnCMD);
 		
 		this.btnPS = new JButton("start powershell");
@@ -124,14 +102,14 @@ public class ComputerFrame extends JFrame {
 				}
 			}
 		});
-		this.btnPS.setBounds(10, 84, 141, 23);
+		this.btnPS.setBounds(10, 84, 151, 23);
 		this.contentPane.add(this.btnPS);
 		
 		this.separator1 = new JLabel("------------------------------------------------------------------------------------");
 		this.separator1.setBounds(10, 324, 363, 14);
 		this.contentPane.add(this.separator1);
 		
-		this.btnJavaVersion = new JButton("java version");
+		this.btnJavaVersion = new JButton("Java Version");
 		this.btnJavaVersion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -313,7 +291,7 @@ public class ComputerFrame extends JFrame {
 				}
 			}
 		});
-		this.btnStartNotepad.setBounds(10, 118, 141, 23);
+		this.btnStartNotepad.setBounds(10, 118, 151, 23);
 		this.contentPane.add(this.btnStartNotepad);
 		
 		this.btnRegedit = new JButton("regedit");
@@ -329,7 +307,7 @@ public class ComputerFrame extends JFrame {
 				}
 			}
 		});
-		this.btnRegedit.setBounds(10, 152, 141, 23);
+		this.btnRegedit.setBounds(10, 152, 151, 23);
 		this.contentPane.add(this.btnRegedit);
 		
 		this.lblInfo2 = new JLabel("Linux Functions");
@@ -404,6 +382,9 @@ public class ComputerFrame extends JFrame {
 		});
 		this.btnDefinitions.setBounds(312, 579, 141, 23);
 		this.contentPane.add(this.btnDefinitions);
+
+		this.setVisible(true);
 		
 	}
+	
 }

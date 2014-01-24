@@ -1,6 +1,5 @@
 package org.phin.muc.frame;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,67 +13,60 @@ import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.MenuHandler;
 
-public class AdminMainFrame extends JFrame {
+public class AdminMainFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	// contentPane
 	private JPanel contentPane;
+	
+	// menu object
 	private MenuHandler handler;
+	
+	// labels
+	private JLabel label;
+	
+	// buttons
 	private JButton btnMyComputer;
-
 	private JButton btnLog;
 	private JButton btnApplicationOptions;
-	private JLabel label;
 	private JButton btnNetworkOptions;
 
 	public AdminMainFrame() {
 		this.createGUI();
 	}
 	
-	private void createGUI() {
+	@Override
+	protected void createGUI() {
+		super.createGUI();
 		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
-		
-		// general JFrame usage
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.setAlwaysOnTop(false);
-		this.setEnabled(true);
-		this.setTitle("Admin Main Frame");
-		this.setLocationRelativeTo(null);
-		
-		// menu init
-		if (UserSettings.menuBar) {
-			this.handler = new MenuHandler();
-			this.handler.initMenu(this);
-		} else {
-			ConsoleFrame.printMessage("info: menu bar has been disabled!");
-		}
-
-		// contentPane usage
+		super.setTitle("Admin Main Frame");
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		// contentPane related inokes
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		
-		// Apply the background color
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.LIGHT_GRAY);
-		}
-		
+		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
+		
+		// menu init
+		this.handler = new MenuHandler();
+		this.handler.initMenu(this);
 		
 		this.btnMyComputer = new JButton("My Computer");
 		this.btnMyComputer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				initLogFrame();
+				
 				if (Strings.compFrame != null) {
 					Strings.compFrame.dispose();
 					Strings.compFrame = new ComputerFrame();
+					Strings.compFrame.setLocation(Strings.messageFrame.getX() - 800, getY() - 25);
 				} else {
 					Strings.compFrame = new ComputerFrame();
+					Strings.compFrame.setLocation(Strings.messageFrame.getX() - 800, getY() - 25);
 				}
 			}
 		});
@@ -85,25 +77,13 @@ public class AdminMainFrame extends JFrame {
 		this.btnLog.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// log handler
-				if (Strings.messageFrame != null) {
-					if (UserSettings.saveLogText) {
-						final String text = Strings.messageFrame.getText();
-						Strings.messageFrame.dispose();
-						Strings.messageFrame = new LogFrame(text);
-					} else {
-						Strings.messageFrame.dispose();
-						Strings.messageFrame = new LogFrame();
-					}
-				} else {
-					Strings.messageFrame = new LogFrame();
-				}
+				initLogFrame();
 			}
 		});
 		this.btnLog.setBounds(130, 11, 131, 38);
 		this.contentPane.add(this.btnLog);
 		
-		this.btnApplicationOptions = new JButton("application options");
+		this.btnApplicationOptions = new JButton("Application Options");
 		this.btnApplicationOptions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -123,12 +103,31 @@ public class AdminMainFrame extends JFrame {
 		this.contentPane.add(this.label);
 		
 		// this will not be implemented for a long long time
-		this.btnNetworkOptions = new JButton("network options");
+		this.btnNetworkOptions = new JButton("Network Options");
 		this.btnNetworkOptions.setBounds(10, 442, 163, 38);
 		this.contentPane.add(this.btnNetworkOptions);
 		
-		this.setVisible(true);
+		super.setLocationRelativeTo(null);
+		super.setVisible(true);
 		
+	}
+	
+	private void initLogFrame() {
+		if (Strings.messageFrame != null) {
+			if (UserSettings.saveLogText) {
+				final String text = Strings.messageFrame.getText();
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame(text);
+				Strings.messageFrame.setLocation(this.getX() + 400, this.getY() + 25);
+			} else {
+				Strings.messageFrame.dispose();
+				Strings.messageFrame = new LogFrame();
+				Strings.messageFrame.setLocation(this.getX() + 400, this.getY() + 25);
+			}
+		} else {
+			Strings.messageFrame = new LogFrame();
+			Strings.messageFrame.setLocation(this.getX() + 400, this.getY() + 25);
+		}
 	}
 
 }

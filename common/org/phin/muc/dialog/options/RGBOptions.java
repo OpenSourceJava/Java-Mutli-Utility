@@ -1,21 +1,20 @@
 package org.phin.muc.dialog.options;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.lib.Strings;
+import org.phin.muc.dialog.MultiUtilityDialog;
 import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.ColorHandler;
+import org.phin.muc.util.ReloadHandler;
 
-public class RGBOptions extends JFrame {
+public class RGBOptions extends MultiUtilityDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -31,51 +30,28 @@ public class RGBOptions extends JFrame {
 	private JTextField txtDialogRed;
 	private JTextField txtDialogGreen;
 	private JTextField txtDialogBlue;
+	private JTextField txtJavaDialogColors;
 
 	public RGBOptions() {
 		this.createGUI();
 	}
 	
-	private void createGUI() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(false);
-		this.setAlwaysOnTop(true);
-		this.setEnabled(true);
-		this.setVisible(true);
-		this.setTitle("backgroud color changer");
-		this.setLocationRelativeTo(null);
-	
-		if (Strings.isAdmin) {
-			if (Strings.adminFrame != null) {
-				Strings.adminFrame.setEnabled(false);
-			}
-		} else {
-			if (Strings.userFrame != null) {
-				Strings.userFrame.setEnabled(false);
-			}
-		}
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(false);
-		}
-		
-		this.setBounds(100, 100, Strings.DEFAULT_DIALOG_WIDTH, Strings.DEFAULT_DIALOG_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIALOG_DIM);
-		
+	@Override
+	protected void createGUI() {
+		// call the super createGUI
+		super.createGUI();
+				
+		// title set
+		super.setTitle("Color Picker");
+				
 		// contentPane related things
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		this.setContentPane(this.contentPane);
+		super.colorInit(this.contentPane);
+		super.setContentPane(this.contentPane);
 		
-		// sets the dialogs background color
-		if ((UserSettings.DIALOG_RED != 0) && (UserSettings.DIALOG_GREEN != 0) && (UserSettings.DIALOG_BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.DIALOG_RED, UserSettings.DIALOG_GREEN, UserSettings.DIALOG_BLUE));  
-		} else {
-			this.contentPane.setBackground(Color.DARK_GRAY);
-		}
-		
-		this.btnRevert = new JButton("revert");
+		this.btnRevert = new JButton("Revert");
 		this.btnRevert.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -88,49 +64,13 @@ public class RGBOptions extends JFrame {
 				txtDialogGreen.setText("Dialog Green");
 				txtJavaColors.setText("Java Colors");
 				
-				UserSettings.BLUE = 0;
-				UserSettings.RED = 0;
-				UserSettings.GREEN = 0;
+				UserSettings.BLUE = 90;
+				UserSettings.RED = 90;
+				UserSettings.GREEN = 90;
 				
-				UserSettings.DIALOG_BLUE = 0;
-				UserSettings.DIALOG_GREEN = 0;
-				UserSettings.DIALOG_RED = 0;
-				
-			}
-		});
-		this.btnRevert.setBounds(60, 148, 90, 25);
-		this.contentPane.add(this.btnRevert);
-		
-		this.btnOkay = new JButton("okay");
-		this.btnOkay.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (!txtRed.getText().equals("Red") && (!txtGreen.getText().equals("Green") && (!txtBlue.getText().equals("Blue")))) {
-					int red, green, blue;
-					red = Integer.parseInt(txtRed.getText());
-					green = Integer.parseInt(txtGreen.getText());
-					blue = Integer.parseInt(txtBlue.getText());
-					
-					UserSettings.BLUE = blue;
-					UserSettings.RED = red;
-					UserSettings.GREEN = green;
-				} 
-				
-				if (!txtDialogRed.getText().equals("Dialog Red") && (!txtDialogGreen.getText().equals("Dialog Green") && (!txtDialogBlue.getText().equals("Dialog Blue")))) {
-					int red, green, blue;
-					red = Integer.parseInt(txtDialogRed.getText());
-					green = Integer.parseInt(txtDialogGreen.getText());
-					blue = Integer.parseInt(txtDialogBlue.getText());
-					
-					UserSettings.DIALOG_BLUE = blue;
-					UserSettings.DIALOG_RED = red;
-					UserSettings.DIALOG_GREEN = green;
-				} 
-				
-				if (!txtJavaColors.getText().equals("Java Colors")) {
-					String colorString = txtJavaColors.getText();
-					ColorHandler.checkColor(colorString);
-				}
+				UserSettings.DIALOG_BLUE = 64;
+				UserSettings.DIALOG_GREEN = 64;
+				UserSettings.DIALOG_RED = 64;
 				
 			}
 			
@@ -139,7 +79,27 @@ public class RGBOptions extends JFrame {
 				dispose();
 			}
 		});
-		this.btnOkay.setBounds(195, 149, 90, 25);
+		this.btnRevert.setBounds(10, 149, 140, 25);
+		this.contentPane.add(this.btnRevert);
+		
+		this.btnOkay = new JButton("Okay (will issue a reload)");
+		this.btnOkay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				ColorHandler.frameRGB(txtRed.getText(), txtGreen.getText(), txtBlue.getText());
+				ColorHandler.dialogRGB(txtDialogRed.getText(), txtDialogGreen.getText(), txtDialogBlue.getText());
+				ColorHandler.checkColor(txtJavaColors.getText());
+				ReloadHandler.reloadUI();
+				
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				dispose();
+			}
+		});
+		this.btnOkay.setBounds(160, 149, 174, 25);
 		this.contentPane.add(this.btnOkay);
 		
 		this.txtRed = new JTextField("Red");
@@ -177,7 +137,7 @@ public class RGBOptions extends JFrame {
 				}		
 			}
 		});
-		this.txtJavaColors.setBounds(248, 81, 86, 20);
+		this.txtJavaColors.setBounds(227, 64, 107, 20);
 		this.txtJavaColors.setColumns(10);
 		this.contentPane.add(this.txtJavaColors);
 		
@@ -241,22 +201,12 @@ public class RGBOptions extends JFrame {
 		this.txtDialogBlue.setBounds(106, 112, 86, 20);
 		this.txtDialogBlue.setColumns(10);
 		this.contentPane.add(this.txtDialogBlue);
+		
+		this.txtJavaDialogColors = new JTextField();
+		this.txtJavaDialogColors.setText("Java Dialog Colors");
+		this.txtJavaDialogColors.setBounds(227, 96, 107, 20);
+		this.txtJavaDialogColors.setColumns(10);
+		this.contentPane.add(this.txtJavaDialogColors);
 	
-	}
-	
-	@Override
-	public void dispose() {
-		super.dispose();
-		
-		if (Strings.adminFrame != null) {
-			Strings.adminFrame.setEnabled(true);
-		} else if (Strings.userFrame != null) {
-			Strings.userFrame.setEnabled(true);
-		}
-		
-		if (Strings.consoleFrame != null) {
-			Strings.consoleFrame.setEnabled(true);
-		}
-		
 	}
 }

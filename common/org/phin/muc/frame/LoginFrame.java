@@ -1,6 +1,5 @@
 package org.phin.muc.frame;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,20 +8,16 @@ import java.awt.event.MouseEvent;
 
 import javax.security.auth.login.CredentialException;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.lib.Reference;
-import org.phin.muc.lib.Strings;
-import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.LAFHandler;
 import org.phin.muc.util.LoginHandler;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -38,48 +33,34 @@ public class LoginFrame extends JFrame {
 	private JButton btnLogin;
 
 	public LoginFrame() {
+		// sets look and feel
+		LAFHandler.setNativeLookAndFeel();
+		
+		// creates the gui
 		this.createGUI();
 	}
 	
-	private void createGUI() {
+	@Override
+	protected void createGUI() {
+		super.createGUI();
+		super.setTitle("Login");
 		
-		// look and feel handler
-		LAFHandler.setNativeLookAndFeel();
-		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
-				
-		// JFrame related methods
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle(Reference.MU_TITLE);
-		this.setResizable(false);
-		this.setEnabled(true);
-		this.setAlwaysOnTop(true);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		
-		// content pane related methods
+		// contentPane related inokes
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		this.contentPane.setBackground(Color.LIGHT_GRAY);
+		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
-		
-		if ((UserSettings.RED != 0) && (UserSettings.GREEN != 0) && (UserSettings.BLUE != 0)) {
-			this.contentPane.setBackground(new Color(UserSettings.RED, UserSettings.GREEN, UserSettings.BLUE));
-		} else {
-			this.contentPane.setBackground(Color.LIGHT_GRAY);
-		}
 		
 		// components 
 		this.userNameField = new JTextField();
 		this.userNameField.setToolTipText("enter a user name here");
-		this.userNameField.setBounds(329, 160, 86, 20);
+		this.userNameField.setBounds(304, 234, 86, 20);
 		this.userNameField.setColumns(10);
 		this.contentPane.add(this.userNameField);
 		
 		this.lblUsername = new JLabel("username:");
-		this.lblUsername.setBounds(341, 135, 58, 14);
+		this.lblUsername.setBounds(318, 209, 58, 14);
 		this.contentPane.add(this.lblUsername);
 		
 		this.passwordField = new JPasswordField();
@@ -105,21 +86,21 @@ public class LoginFrame extends JFrame {
 				} 
 			}
 		});
-		this.passwordField.setBounds(329, 216, 86, 20);
+		this.passwordField.setBounds(304, 290, 86, 20);
 		this.contentPane.add(this.passwordField);
 		
 		this.lblPassword = new JLabel("password:");
-		this.lblPassword.setBounds(341, 191, 58, 14);
+		this.lblPassword.setBounds(314, 265, 58, 14);
 		this.contentPane.add(this.lblPassword);
 		
 		this.visiblePasswordField = new JTextField();
 		this.visiblePasswordField.setEditable(false);
-		this.visiblePasswordField.setBounds(329, 270, 86, 20);
+		this.visiblePasswordField.setBounds(304, 346, 86, 20);
 		this.visiblePasswordField.setColumns(10);
 		this.contentPane.add(this.visiblePasswordField);
 		
 		this.lblVisiblePassword = new JLabel("visible password:");
-		this.lblVisiblePassword.setBounds(329, 247, 86, 14);
+		this.lblVisiblePassword.setBounds(304, 321, 86, 14);
 		this.contentPane.add(this.lblVisiblePassword);
 		
 		this.btnViewPassword = new JButton("view password");
@@ -141,7 +122,7 @@ public class LoginFrame extends JFrame {
 			}
 			
 		});
-		this.btnViewPassword.setBounds(425, 216, 103, 20);
+		this.btnViewPassword.setBounds(400, 290, 103, 20);
 		this.contentPane.add(this.btnViewPassword);
 		
 		this.btnLogin = new JButton("login");
@@ -165,8 +146,11 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
-		this.btnLogin.setBounds(327, 610, 89, 23);
+		this.btnLogin.setBounds(301, 377, 89, 32);
 		this.contentPane.add(this.btnLogin);
+		
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	
 	}
 

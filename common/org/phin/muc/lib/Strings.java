@@ -15,7 +15,7 @@ public class Strings {
 	
 	// the height and width of the frames
 	public static final int DEFAULT_HEIGHT = 700;
-	public static final int DEFAULT_WIDTH = 750;
+	public static final int DEFAULT_WIDTH = 700;
 	
 	// the dimension of the frame (width * height)
 	public static final Dimension DEFAULT_DIM = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);

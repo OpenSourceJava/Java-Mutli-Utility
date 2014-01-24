@@ -1,6 +1,5 @@
 package org.phin.muc.dialog;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -14,7 +13,6 @@ public class AboutDialog extends MultiUtilityDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-
 	private JLabel lblVersion;
 
 	public AboutDialog() {
@@ -33,13 +31,18 @@ public class AboutDialog extends MultiUtilityDialog {
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		this.contentPane.setBackground(Color.LIGHT_GRAY);
+		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
 		this.lblVersion = new JLabel("Version = " + Reference.MU_VERSION);
 		this.lblVersion.setFont(new Font("Tekton Pro Cond", Font.PLAIN, 18));
 		this.lblVersion.setBounds(22, 25, 128, 14);
 		this.contentPane.add(this.lblVersion);
+		
+		// loads all components before showing the frame
+		super.setLocationRelativeTo(null);
+		super.toFront();
+		super.setVisible(true);
 		
 	}
 }

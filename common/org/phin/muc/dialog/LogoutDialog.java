@@ -35,7 +35,7 @@ public class LogoutDialog extends MultiUtilityDialog {
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(null);
-		super.setDialogColor(this.contentPane);
+		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
 		this.btnLogout = new JButton("Logout");
@@ -68,6 +68,7 @@ public class LogoutDialog extends MultiUtilityDialog {
 		
 		// loads all components before showing the frame
 		super.setLocationRelativeTo(null);
+		super.toFront();
 		super.setVisible(true);
 		
 	}
