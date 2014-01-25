@@ -9,10 +9,9 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.dialog.MultiUtilityDialog;
-import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
 
-public class MenuBarOptions extends MultiUtilityDialog {
+public class UserMenuBarOptions extends MultiUtilityDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,12 +23,12 @@ public class MenuBarOptions extends MultiUtilityDialog {
 	private JRadioButton rBtnWindowMenu;
 	private JRadioButton rBtnHelpMenu;
 	private JRadioButton rBtnAppMenu;
-	private JRadioButton rBtnAdminMenu;
+	//private JRadioButton rBtnAdminMenu;
 	
 	private JButton btnDefaults;
 	private JButton btnOkay;
 
-	public MenuBarOptions() {
+	public UserMenuBarOptions() {
 		this.createGUI();
 	}
 	
@@ -52,10 +51,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnMenuBar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.menuBar) {
-					UserSettings.menuBar = false;
+				if (UserSettings.userMenuBar) {
+					UserSettings.userMenuBar = false;
 				} else {
-					UserSettings.menuBar = true;
+					UserSettings.userMenuBar = true;
 				}
 			}
 		});
@@ -66,10 +65,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnFileMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.fileMenu) {
-					UserSettings.fileMenu = false;
+				if (UserSettings.userFileMenu) {
+					UserSettings.userFileMenu = false;
 				} else {
-					UserSettings.fileMenu = true;
+					UserSettings.userFileMenu = true;
 				}
 			}
 		});
@@ -80,10 +79,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnEditMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.editMenu) {
-					UserSettings.editMenu = false;
+				if (UserSettings.userEditMenu) {
+					UserSettings.userEditMenu = false;
 				} else {
-					UserSettings.editMenu = true;
+					UserSettings.userEditMenu = true;
 				}
 			}
 		});
@@ -94,10 +93,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnWindowMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.windowMenu) {
-					UserSettings.windowMenu = false;
+				if (UserSettings.userWindowMenu) {
+					UserSettings.userWindowMenu = false;
 				} else {
-					UserSettings.windowMenu = true;
+					UserSettings.userWindowMenu = true;
 				}
 			}
 		});
@@ -108,10 +107,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnHelpMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.helpMenu) {
-					UserSettings.helpMenu = false;
+				if (UserSettings.userHelpMenu) {
+					UserSettings.userHelpMenu = false;
 				} else {
-					UserSettings.helpMenu = true;
+					UserSettings.userHelpMenu = true;
 				}
 			}
 		});
@@ -122,10 +121,10 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.rBtnAppMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (UserSettings.appMenu) {
-					UserSettings.appMenu = false;
+				if (UserSettings.userAppMenu) {
+					UserSettings.userAppMenu = false;
 				} else {
-					UserSettings.appMenu = true;
+					UserSettings.userAppMenu = true;
 				}
 			}
 		});
@@ -136,12 +135,12 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.btnDefaults.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				UserSettings.menuBar = true;
-				UserSettings.fileMenu = true;
-				UserSettings.editMenu = true;
-				UserSettings.windowMenu = true;
-				UserSettings.helpMenu = true;
-				UserSettings.appMenu = true;
+				UserSettings.userMenuBar = true;
+				UserSettings.userFileMenu = true;
+				UserSettings.userEditMenu = true;
+				UserSettings.userWindowMenu = true;
+				UserSettings.userHelpMenu = true;
+				UserSettings.userAppMenu = true;
 			}
 		});
 		this.btnDefaults.setBounds(142, 135, 93, 36);
@@ -157,7 +156,7 @@ public class MenuBarOptions extends MultiUtilityDialog {
 		this.btnOkay.setBounds(245, 135, 89, 36);
 		this.contentPane.add(this.btnOkay);
 		
-		if (Strings.isAdmin) {
+		/*if (Strings.isAdmin) {
 			this.rBtnAdminMenu = new JRadioButton("Admin Menu");
 			this.rBtnAdminMenu.addMouseListener(new MouseAdapter() {
 				@Override
@@ -171,7 +170,7 @@ public class MenuBarOptions extends MultiUtilityDialog {
 			});
 			this.rBtnAdminMenu.setBounds(10, 138, 119, 30);
 			this.contentPane.add(this.rBtnAdminMenu);
-		}
+		}*/
 		
 		this.checkSettings();
 
@@ -185,29 +184,25 @@ public class MenuBarOptions extends MultiUtilityDialog {
 			this.rBtnMenuBar.doClick();
 		}
 		
-		if (UserSettings.fileMenu) {
+		if (UserSettings.userFileMenu) {
 			this.rBtnFileMenu.doClick();
 		}
 		
-		if (UserSettings.editMenu) {
+		if (UserSettings.userEditMenu) {
 			this.rBtnEditMenu.doClick();
 		}
 		
-		if (UserSettings.helpMenu) {
+		if (UserSettings.userHelpMenu) {
 			this.rBtnHelpMenu.doClick();
 		}
 		
-		if (UserSettings.appMenu) {
+		if (UserSettings.userAppMenu) {
 			this.rBtnAppMenu.doClick();
 		}
 		
-		if (UserSettings.windowMenu) {
+		if (UserSettings.userWindowMenu) {
 			this.rBtnWindowMenu.doClick();
 		}
-		
-		if (UserSettings.adminMenu) {
-			this.rBtnAdminMenu.doClick();
-		}
-		
+
 	}
 }
