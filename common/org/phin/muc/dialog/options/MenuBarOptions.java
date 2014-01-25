@@ -9,7 +9,6 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.dialog.MultiUtilityDialog;
-import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
 
 public class MenuBarOptions extends MultiUtilityDialog {
@@ -24,8 +23,7 @@ public class MenuBarOptions extends MultiUtilityDialog {
 	private JRadioButton rBtnWindowMenu;
 	private JRadioButton rBtnHelpMenu;
 	private JRadioButton rBtnAppMenu;
-	private JRadioButton rBtnAdminMenu;
-	
+
 	private JButton btnDefaults;
 	private JButton btnOkay;
 
@@ -87,7 +85,7 @@ public class MenuBarOptions extends MultiUtilityDialog {
 				}
 			}
 		});
-		this.rBtnEditMenu.setBounds(10, 90, 119, 36);
+		this.rBtnEditMenu.setBounds(10, 90, 119, 30);
 		this.contentPane.add(this.rBtnEditMenu);
 		
 		this.rBtnWindowMenu = new JRadioButton("Window Menu");
@@ -144,7 +142,7 @@ public class MenuBarOptions extends MultiUtilityDialog {
 				UserSettings.appMenu = true;
 			}
 		});
-		this.btnDefaults.setBounds(142, 135, 93, 36);
+		this.btnDefaults.setBounds(146, 148, 89, 23);
 		this.contentPane.add(this.btnDefaults);
 		
 		this.btnOkay = new JButton("Okay");
@@ -154,24 +152,8 @@ public class MenuBarOptions extends MultiUtilityDialog {
 				dispose();
 			}
 		});
-		this.btnOkay.setBounds(245, 135, 89, 36);
+		this.btnOkay.setBounds(245, 148, 89, 23);
 		this.contentPane.add(this.btnOkay);
-		
-		if (Strings.isAdmin) {
-			this.rBtnAdminMenu = new JRadioButton("Admin Menu");
-			this.rBtnAdminMenu.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if (UserSettings.adminMenu) {
-						UserSettings.adminMenu = false;
-					} else {
-						UserSettings.adminMenu = true;
-					}
-				}
-			});
-			this.rBtnAdminMenu.setBounds(10, 138, 119, 30);
-			this.contentPane.add(this.rBtnAdminMenu);
-		}
 		
 		this.checkSettings();
 
@@ -205,9 +187,6 @@ public class MenuBarOptions extends MultiUtilityDialog {
 			this.rBtnWindowMenu.doClick();
 		}
 		
-		if (UserSettings.adminMenu) {
-			this.rBtnAdminMenu.doClick();
-		}
-		
 	}
+	
 }

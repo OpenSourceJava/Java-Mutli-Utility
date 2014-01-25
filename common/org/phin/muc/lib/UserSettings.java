@@ -27,20 +27,7 @@ public class UserSettings {
 	public static boolean appMenu = true;
 	public static boolean windowMenu = true;
 	
-	// only if the user is a admin
-	public static boolean adminMenu = true;
-	
 	// save text value
 	public static boolean saveLogText = true;
-	
-	public static boolean userMenuBar = true;
-	public static boolean userFileMenu = true;
-	public static boolean userEditMenu = true;
-	public static boolean userHelpMenu = true;
-	public static boolean userAppMenu = true;
-	public static boolean userWindowMenu = true;
-	
-	public static boolean userLog = false;
-	public static boolean userCMD = false;
 	
 }

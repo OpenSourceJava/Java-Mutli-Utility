@@ -32,7 +32,6 @@ public class LogFrame extends MultiUtilityFrame {
 	
 	@Override
 	protected void createGUI() {
-		
 		super.createGUI();
 		super.setTitle("Log");
 		
