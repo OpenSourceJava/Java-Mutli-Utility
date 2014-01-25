@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 import org.phin.muc.util.SystemHandler;
 
 public class ComputerFrame extends MultiUtilityFrame {
@@ -68,8 +69,6 @@ public class ComputerFrame extends MultiUtilityFrame {
 		super.colorInit(this.contentPane);
 		this.setContentPane(this.contentPane);
 		
-		//this.initLogFrame();
-		
 		this.lblInfo1 = new JLabel("Windows Functions");
 		this.lblInfo1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		this.lblInfo1.setBounds(20, 11, 141, 28);
@@ -79,11 +78,25 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnCMD.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				try {
-					Runtime.getRuntime().exec("cmd /c start cmd");
-				} catch (Exception e1) {
-					ConsoleFrame.printMessage("error: could not create process cmd.exe");
-					e1.printStackTrace();
+				if (Strings.isAdmin) {
+					try {
+						Runtime.getRuntime().exec("cmd /c start cmd");
+					} catch (Exception e1) {
+						ConsoleFrame.printMessage("error: could not create process cmd.exe\n");
+						e1.printStackTrace();
+					} 
+				} else {
+					if (UserSettings.userCMD) {
+						try {
+							Runtime.getRuntime().exec("cmd /c start cmd");
+						} catch (Exception e1) {
+							ConsoleFrame.printMessage("error: could not create process cmd.exe");
+							e1.printStackTrace();
+						}
+					} else {
+						ConsoleFrame.printMessage("error: command prompt has been disabled\n");
+						throw new SecurityException();
+					}
 				}
 			}
 		});
@@ -94,11 +107,25 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnPS.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				try {
-					Runtime.getRuntime().exec("powershell /c start powershell");
-				} catch (Exception e1) {
-					ConsoleFrame.printMessage("error: could not create process powershell.exe");
-					e1.printStackTrace();
+				if (Strings.isAdmin) {
+					try {
+						Runtime.getRuntime().exec("powershell /c start powershell");
+					} catch (Exception e1) {
+						ConsoleFrame.printMessage("error: could not create process powershell.exe\n");
+						e1.printStackTrace();
+					} 
+				} else {
+					if (UserSettings.userCMD) {
+						try {
+							Runtime.getRuntime().exec("powershell /c start powershell");
+						} catch (Exception e1) {
+							ConsoleFrame.printMessage("error: could not create process powershell.exe\n");
+							e1.printStackTrace();
+						}
+					} else {
+						ConsoleFrame.printMessage("error: powershell has been disabled\n");
+						throw new SecurityException();
+					}
 				}
 			}
 		});

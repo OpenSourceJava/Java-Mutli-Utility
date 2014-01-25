@@ -1,37 +1,38 @@
 package org.phin.muc.frame;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.phin.muc.lib.Strings;
+import org.phin.muc.util.MenuHandler;
 
-public class UserMainFrame extends JFrame {
+public class UserMainFrame extends MultiUtilityFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 
+	private MenuHandler handler;
 
 	public UserMainFrame() {
+		// create gui
+		super.createGUI();
+		super.setTitle("User Main Frame");
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// contentPane related invocations
+		this.contentPane = new JPanel();
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(null);
+		super.colorInit(this.contentPane);
+		this.setContentPane(this.contentPane);
 		
-		this.setBounds(100, 100, Strings.DEFAULT_WIDTH, Strings.DEFAULT_HEIGHT);
-		this.setSize(Strings.DEFAULT_DIM);
+		this.handler = new MenuHandler();
+		this.handler.userMenuInit(this);
 		
-		// general JFrame usage
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.setVisible(true);
-		this.setAlwaysOnTop(false);
-		this.setEnabled(true);
-		this.setTitle("User Main Frame");
 		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 	}
 
 }
