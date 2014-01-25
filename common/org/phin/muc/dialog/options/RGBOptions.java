@@ -207,6 +207,8 @@ public class RGBOptions extends MultiUtilityDialog {
 		this.txtJavaDialogColors.setBounds(227, 96, 107, 20);
 		this.txtJavaDialogColors.setColumns(10);
 		this.contentPane.add(this.txtJavaDialogColors);
+		
+		this.setVisible(true);
 	
 	}
 }
