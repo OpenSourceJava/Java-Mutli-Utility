@@ -58,6 +58,10 @@ public class UserSettingOptions extends MultiUtilityDialog {
 		});
 		this.btnMenuSettings.setBounds(10, 141, 176, 56);
 		this.contentPane.add(this.btnMenuSettings);
+		
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	
-	}
+	} 
+
 }

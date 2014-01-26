@@ -3,6 +3,8 @@ package org.phin.muc.lib;
 import java.awt.Dimension;
 
 import org.phin.deskcalc.frame.BasicCalculatorFrame;
+import org.phin.muc.dialog.options.UserMenuBarOptions;
+import org.phin.muc.dialog.options.UserSettingOptions;
 import org.phin.muc.frame.AdminMainFrame;
 import org.phin.muc.frame.AdminOptionsFrame;
 import org.phin.muc.frame.ComputerFrame;
@@ -35,6 +37,7 @@ public class Strings {
 	public static final Dimension DEFAULT_DIALOG_DIM = new Dimension(DEFAULT_DIALOG_WIDTH, DEFAULT_DIALOG_HEIGHT);
 
 	// universal frames for managing what is open where easily 
+	// sorry data encapsulation :(  
 	public static AdminMainFrame adminFrame;
 	public static AdminOptionsFrame adminOptions;
 	public static ComputerFrame compFrame;
@@ -42,9 +45,13 @@ public class Strings {
 	public static ConsoleFrame consoleFrame;
 	public static LogFrame messageFrame;
 	public static UserMainFrame userFrame;
+	public static UserSettingOptions userOptions;
 	
 	// global apps
 	public static BasicCalculatorFrame calculator;
+	
+	// Dialogs
+	public static UserMenuBarOptions userMenuOptions;
 	
 	// if true the user is a admin otherwise the user is not
 	// be default and for obvious reasons the default is false.

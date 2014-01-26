@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
+import org.phin.muc.dialog.DisableUserFileMenuDialog;
+import org.phin.muc.dialog.DisableUserMenuDialog;
 import org.phin.muc.dialog.MultiUtilityDialog;
+import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
 
 public class UserMenuBarOptions extends MultiUtilityDialog {
@@ -47,12 +50,17 @@ public class UserMenuBarOptions extends MultiUtilityDialog {
 		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
+		if (Strings.userOptions != null) {
+			Strings.userOptions.setEnabled(false);	
+		}
+		
 		this.rBtnMenuBar = new JRadioButton("Menu Bar");
 		this.rBtnMenuBar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (UserSettings.userMenuBar) {
-					UserSettings.userMenuBar = false;
+					DisableUserMenuDialog dialog = new DisableUserMenuDialog();
+					dialog.setVisible(true);
 				} else {
 					UserSettings.userMenuBar = true;
 				}
@@ -66,7 +74,8 @@ public class UserMenuBarOptions extends MultiUtilityDialog {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (UserSettings.userFileMenu) {
-					UserSettings.userFileMenu = false;
+					DisableUserFileMenuDialog dialog = new DisableUserFileMenuDialog();
+					dialog.setVisible(true);
 				} else {
 					UserSettings.userFileMenu = true;
 				}
@@ -204,5 +213,22 @@ public class UserMenuBarOptions extends MultiUtilityDialog {
 			this.rBtnWindowMenu.doClick();
 		}
 
+	}
+	
+	@Override
+	public void dispose() {	
+		super.dispose();
+		
+		if (Strings.adminFrame != null) {
+			Strings.adminFrame.setEnabled(false);
+		}
+		
+		if (Strings.consoleFrame != null) {
+			Strings.consoleFrame.setEnabled(false);
+		}
+		
+		if (Strings.userOptions != null) {
+			Strings.userOptions.setEnabled(true);
+		}
 	}
 }

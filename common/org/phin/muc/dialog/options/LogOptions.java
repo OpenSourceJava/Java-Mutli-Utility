@@ -39,7 +39,7 @@ public class LogOptions extends MultiUtilityDialog {
 		super.colorInit(this.contentPane);
 		super.setContentPane(this.contentPane);
 		
-		this.btnRevert = new JButton("Revert");
+		this.btnRevert = new JButton("Defaults");
 		this.btnRevert.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
+import org.phin.muc.dialog.DisableMenuDialog;
 import org.phin.muc.dialog.MultiUtilityDialog;
 import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
@@ -53,7 +54,8 @@ public class MenuBarOptions extends MultiUtilityDialog {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (UserSettings.menuBar) {
-					UserSettings.menuBar = false;
+					DisableMenuDialog dialog = new DisableMenuDialog();
+					dialog.setVisible(true);
 				} else {
 					UserSettings.menuBar = true;
 				}

@@ -221,8 +221,12 @@ public class MenuHandler {
 				this.userPrivileges.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						UserSettingOptions option = new UserSettingOptions();
-						option.setVisible(true);
+						if (Strings.userOptions != null) {
+							Strings.userOptions.dispose();
+							Strings.userOptions = new UserSettingOptions();
+						} else {
+							Strings.userOptions = new UserSettingOptions();
+						}
 					}
 				});
 				this.administrativeMenu.add(this.userPrivileges);

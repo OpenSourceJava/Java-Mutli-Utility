@@ -40,7 +40,8 @@ public class UserSettings {
 	public static boolean userAppMenu = true;
 	public static boolean userWindowMenu = true;
 	
-	public static boolean userLog = false;
-	public static boolean userCMD = false;
+	public static boolean userLog = true;
+	public static boolean userCMD = true;
+	public static boolean userRegedit = true;
 	
 }

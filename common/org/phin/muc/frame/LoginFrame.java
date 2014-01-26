@@ -146,7 +146,7 @@ public class LoginFrame extends MultiUtilityFrame {
 				}
 			}
 		});
-		this.btnLogin.setBounds(301, 377, 89, 32);
+		this.btnLogin.setBounds(304, 377, 86, 32);
 		this.contentPane.add(this.btnLogin);
 		
 		this.setLocationRelativeTo(null);
