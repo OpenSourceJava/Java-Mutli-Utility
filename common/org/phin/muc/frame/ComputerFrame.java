@@ -3,14 +3,17 @@ package org.phin.muc.frame;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.phin.muc.dialog.options.CustomCMDOptions;
 import org.phin.muc.lib.Strings;
 import org.phin.muc.lib.UserSettings;
+import org.phin.muc.util.GeneratorHandler;
 import org.phin.muc.util.SystemHandler;
 
 public class ComputerFrame extends MultiUtilityFrame {
@@ -51,6 +54,12 @@ public class ComputerFrame extends MultiUtilityFrame {
 	private JButton btnRegedit;
 	private JButton btnCMD;
 	private JButton btnPS;
+
+	private JButton btnStartCustomCMD;
+
+	private JButton btnCustomCMDSettings;
+
+	private JLabel lblInfo;
 	
 	public ComputerFrame() {
 		this.createGUI();
@@ -409,9 +418,40 @@ public class ComputerFrame extends MultiUtilityFrame {
 		});
 		this.btnDefinitions.setBounds(312, 579, 141, 23);
 		this.contentPane.add(this.btnDefinitions);
+		
+		this.btnStartCustomCMD = new JButton("start custom command prompt");
+		this.btnStartCustomCMD.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				try {
+					GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
+					Runtime.getRuntime().exec("cmd /c start customCMD.bat");
+				} catch (IOException e2) {
+					ConsoleFrame.printMessage("error: could not create process customCMD.bat \n");
+					e2.printStackTrace();
+				}
+			}
+		});
+		this.btnStartCustomCMD.setBounds(10, 290, 204, 23);
+		this.contentPane.add(this.btnStartCustomCMD);
+		
+		this.btnCustomCMDSettings = new JButton("custom command prompt settings");
+		this.btnCustomCMDSettings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setEnabled(false);
+				CustomCMDOptions option = new CustomCMDOptions();
+				option.setVisible(true);
+			}
+		});
+		this.btnCustomCMDSettings.setBounds(10, 252, 204, 23);
+		this.contentPane.add(this.btnCustomCMDSettings);
+		
+		this.lblInfo = new JLabel("a custom command prompt");
+		this.lblInfo.setBounds(10, 224, 172, 14);
+		this.contentPane.add(this.lblInfo);
 
 		this.setVisible(true);
 		
 	}
-	
 }

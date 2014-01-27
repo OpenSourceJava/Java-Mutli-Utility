@@ -51,21 +51,20 @@ public class MultiUtilityDialog extends JFrame {
 	public void dispose() {
 		super.dispose();
 		
+		if (Strings.adminOptions != null) {
+			Strings.adminOptions.setEnabled(true);
+		}
+			
+		if (Strings.compFrame != null) {
+			Strings.compFrame.setEnabled(true);
+		}
+			
 		if (Strings.isAdmin) {
-			if (Strings.adminOptions != null) {
-				Strings.adminOptions.setEnabled(true);
-			}
-			
-			if (Strings.compFrame != null) {
-				Strings.compFrame.setEnabled(true);
-			}
-			
-			Strings.adminFrame.setEnabled(true);
-		
-		} else {
-			if (Strings.userFrame != null) {
+			Strings.adminFrame.setEnabled(true);	
+		}
+
+		if (Strings.userFrame != null) {
 				Strings.userFrame.setEnabled(true);
-			}
 		}
 		
 		if (Strings.messageFrame != null) {
@@ -87,24 +86,20 @@ public class MultiUtilityDialog extends JFrame {
 	 * <code>setEnabled(false)</code>
 	 */
 	protected void pendFrame() {
-		if (Strings.isAdmin) {
-			if (Strings.adminFrame != null) {
-				
-				if (Strings.adminOptions != null) {
+		if (Strings.adminOptions != null) {
 					Strings.adminOptions.setEnabled(false);
-				}
+		}
 				
-				if (Strings.compFrame != null) {
-					Strings.compFrame.setEnabled(false);
-				}
-				
-				Strings.adminFrame.setEnabled(false);
-				
-			}
-		} else {
-			if (Strings.userFrame != null) {
-				Strings.userFrame.setEnabled(false);
-			}
+		if (Strings.compFrame != null) {
+			Strings.compFrame.setEnabled(false);
+		}
+		
+		if (Strings.adminFrame != null) {
+			Strings.adminFrame.setEnabled(false);
+		}
+			
+		if (Strings.userFrame != null) {
+			Strings.userFrame.setEnabled(false);
 		}
 		
 		if (Strings.messageFrame != null) {

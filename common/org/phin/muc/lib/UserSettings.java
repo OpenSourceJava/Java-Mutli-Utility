@@ -2,6 +2,11 @@ package org.phin.muc.lib;
 
 public class UserSettings {
 	
+	// CUSTOM COMMAND PROMPT
+	public static String CMD_TITLE;
+	public static String CMD_TEXT_COLOR;
+	public static String CMD_POINTER;
+	
 	// the RGB frame color integers
 	public static int RED = 90;
 	public static int GREEN = 90;
