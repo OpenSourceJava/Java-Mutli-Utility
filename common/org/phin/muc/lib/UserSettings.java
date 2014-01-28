@@ -38,6 +38,7 @@ public class UserSettings {
 	// save text value
 	public static boolean saveLogText = true;
 	
+	// menu bar access handlers
 	public static boolean userMenuBar = true;
 	public static boolean userFileMenu = true;
 	public static boolean userEditMenu = true;
@@ -45,7 +46,11 @@ public class UserSettings {
 	public static boolean userAppMenu = true;
 	public static boolean userWindowMenu = true;
 	
+	// frame access handlers
 	public static boolean userLog = true;
+	public static boolean userConsole = true;
+	public static boolean userConsoleCommands = true;
+	public static boolean userComputerFrame = true;
 	public static boolean userCMD = true;
 	public static boolean userRegedit = true;
 	

@@ -41,7 +41,7 @@ public class UserMenuBarOptions extends MultiUtilityDialog {
 		super.createGUI();
 				
 		// title set
-		super.setTitle("Menu Bar Options");
+		super.setTitle("Menu Bar Settings");
 	
 		// contentPane related things
 		this.contentPane = new JPanel();
@@ -164,22 +164,6 @@ public class UserMenuBarOptions extends MultiUtilityDialog {
 		});
 		this.btnOkay.setBounds(245, 135, 89, 36);
 		this.contentPane.add(this.btnOkay);
-		
-		/*if (Strings.isAdmin) {
-			this.rBtnAdminMenu = new JRadioButton("Admin Menu");
-			this.rBtnAdminMenu.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if (UserSettings.adminMenu) {
-						UserSettings.adminMenu = false;
-					} else {
-						UserSettings.adminMenu = true;
-					}
-				}
-			});
-			this.rBtnAdminMenu.setBounds(10, 138, 119, 30);
-			this.contentPane.add(this.rBtnAdminMenu);
-		}*/
 		
 		this.checkSettings();
 

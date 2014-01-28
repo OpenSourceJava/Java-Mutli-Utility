@@ -143,19 +143,17 @@ public class MenuHandler {
 			
 			this.fileMenu.addSeparator();
 			
-			if (Strings.isAdmin) {
-				this.menuItem = new JMenuItem("Menu bar options");
-				this.menuItem.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						MenuBarOptions option = new MenuBarOptions();
-						option.setVisible(true);
-					}
-				});
-				this.fileMenu.add(this.menuItem);
-				
-				this.fileMenu.addSeparator();
-			} 
+			this.menuItem = new JMenuItem("Menu Bar Options");
+			this.menuItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					MenuBarOptions option = new MenuBarOptions();
+					option.setVisible(true);
+				}
+			});
+			this.fileMenu.add(this.menuItem);
+			
+			this.fileMenu.addSeparator();
 			
 			this.exitItem = new JMenuItem ("Exit");
 			this.exitItem.addMouseListener(new MouseAdapter() {
@@ -356,23 +354,14 @@ public class MenuHandler {
 				this.computerItem.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						if (Strings.isAdmin) {
-							if (Strings.messageFrame != null) {
-								if (UserSettings.saveLogText) {
-									final String text = Strings.messageFrame.getText();
-									Strings.messageFrame.dispose();
-									Strings.messageFrame = new LogFrame(text);
-									Strings.messageFrame.setLocation(frame.getX() + 400, frame.getY() + 25);
-								} else {
-									Strings.messageFrame.dispose();
-									Strings.messageFrame = new LogFrame();
-									Strings.messageFrame.setLocation(frame.getX() + 400, frame.getY() + 25);
-								}
+						if (UserSettings.userComputerFrame) {
+							if (Strings.compFrame != null) {
+								Strings.compFrame.dispose();
+								Strings.compFrame = new ComputerFrame();
 							} else {
-								Strings.messageFrame = new LogFrame();
-								Strings.messageFrame.setLocation(frame.getX() + 400, frame.getY() + 25);
+								Strings.compFrame = new ComputerFrame();
 							}
-						} else {
+							
 							if (UserSettings.userLog) {
 								if (Strings.messageFrame != null) {
 									if (UserSettings.saveLogText) {
@@ -392,13 +381,8 @@ public class MenuHandler {
 							} else {
 								ConsoleFrame.printMessage("warning: log has been disabled \n");
 							}
-						}
-						
-						if (Strings.compFrame != null) {
-							Strings.compFrame.dispose();
-							Strings.compFrame = new ComputerFrame();
 						} else {
-							Strings.compFrame = new ComputerFrame();
+							ConsoleFrame.printMessage("my Computer has been blocked by the admin \n");
 						}
 					}
 				});
@@ -491,29 +475,34 @@ public class MenuHandler {
 			// WINDOW MENU -----------------------------------------------------------
 			if (UserSettings.userWindowMenu) {
 				this.windowMenu = new JMenu("Window"); 
-				this.startConsole = new JMenuItem("Console");
-				this.startConsole.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if (Strings.consoleFrame != null) {
-							Strings.consoleFrame.dispose();
-							Strings.consoleFrame = new ConsoleFrame();
-						} else {
-							Strings.consoleFrame = new ConsoleFrame();
+
+				// THE USER CONSOLE IS ENABLED
+				// ADD THE CONSOLE OPTIONS
+				if (UserSettings.userConsole) {
+					this.startConsole = new JMenuItem("Console");
+					this.startConsole.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mousePressed(MouseEvent e) {
+							if (Strings.consoleFrame != null) {
+								Strings.consoleFrame.dispose();
+								Strings.consoleFrame = new ConsoleFrame();
+							} else {
+								Strings.consoleFrame = new ConsoleFrame();
+							}
 						}
-					}
-				});
-				this.windowMenu.add(this.startConsole);
-				
-				this.showConsoleItem = new JMenuItem("Console Options");
-				this.showConsoleItem.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						// TODO
-					}
-				});
-				this.windowMenu.add(this.showConsoleItem);
-				
+					});
+					this.windowMenu.add(this.startConsole);
+					
+					this.showConsoleItem = new JMenuItem("Console Options");
+					this.showConsoleItem.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO
+						}
+					});
+					this.windowMenu.add(this.showConsoleItem);
+				}
+			
 				// adds the window menu to the menu bar
 				this.bar.add(this.windowMenu);
 			} else {

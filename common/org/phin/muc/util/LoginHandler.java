@@ -9,6 +9,7 @@ import org.phin.muc.frame.ConsoleFrame;
 import org.phin.muc.frame.LoginFrame;
 import org.phin.muc.frame.UserMainFrame;
 import org.phin.muc.lib.Strings;
+import org.phin.muc.lib.UserSettings;
 
 public class LoginHandler {
 	
@@ -23,8 +24,11 @@ public class LoginHandler {
 		} else if ((Strings.USERNAME_1.equals(username) && (Strings.PASSWORD_1.equals(password)))) {
 			Strings.isAdmin = false;
 			
+			if (UserSettings.userConsole) {
+				Strings.consoleFrame = new ConsoleFrame();
+			}
+			
 			// console creation
-			Strings.consoleFrame = new ConsoleFrame();
 			Strings.userFrame = new UserMainFrame();
 			
 		} else {

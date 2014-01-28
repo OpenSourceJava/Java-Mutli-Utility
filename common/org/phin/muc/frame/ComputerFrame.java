@@ -334,12 +334,26 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnRegedit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				try {
-					Runtime.getRuntime().exec("regedit");
-				} catch (Exception e1) {
-					ConsoleFrame.printMessage("error: could not create process regedit.exe \n");  
-					ConsoleFrame.printMessage("error: (most likley need admin privileges) \n");
-					e1.printStackTrace();
+				if (Strings.isAdmin) {
+					try {
+						GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
+						Runtime.getRuntime().exec("regedit");
+					} catch (IOException e2) {
+						ConsoleFrame.printMessage("error: could not create process regedit.exe \n");
+						e2.printStackTrace();
+					}
+				} else {
+					if (UserSettings.userRegedit) {
+						try {
+							GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
+							Runtime.getRuntime().exec("regedit");
+						} catch (IOException e2) {
+							ConsoleFrame.printMessage("error: could not create process regedit.exe \n");
+							e2.printStackTrace();
+						}
+					} else {
+						ConsoleFrame.printMessage("command prompt has been disabled");
+					}
 				}
 			}
 		});
@@ -423,12 +437,26 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnStartCustomCMD.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				try {
-					GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
-					Runtime.getRuntime().exec("cmd /c start customCMD.bat");
-				} catch (IOException e2) {
-					ConsoleFrame.printMessage("error: could not create process customCMD.bat \n");
-					e2.printStackTrace();
+				if (Strings.isAdmin) {
+					try {
+						GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
+						Runtime.getRuntime().exec("cmd /c start customCMD.bat");
+					} catch (IOException e2) {
+						ConsoleFrame.printMessage("error: could not create process customCMD.bat \n");
+						e2.printStackTrace();
+					}
+				} else {
+					if (UserSettings.userCMD) {
+						try {
+							GeneratorHandler.createCustomCMD(UserSettings.CMD_TITLE, UserSettings.CMD_TEXT_COLOR, UserSettings.CMD_POINTER);
+							Runtime.getRuntime().exec("cmd /c start customCMD.bat");
+						} catch (IOException e2) {
+							ConsoleFrame.printMessage("error: could not create process customCMD.bat \n");
+							e2.printStackTrace();
+						}
+					} else {
+						ConsoleFrame.printMessage("command prompt has been disabled");
+					}
 				}
 			}
 		});
@@ -439,7 +467,6 @@ public class ComputerFrame extends MultiUtilityFrame {
 		this.btnCustomCMDSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setEnabled(false);
 				CustomCMDOptions option = new CustomCMDOptions();
 				option.setVisible(true);
 			}

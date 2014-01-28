@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.phin.muc.dialog.MultiUtilityDialog;
-import org.phin.muc.lib.Strings;
 
 public class UserSettingOptions extends MultiUtilityDialog {
 
@@ -31,7 +30,6 @@ public class UserSettingOptions extends MultiUtilityDialog {
 				
 		// title set
 		super.setTitle("User Settings");
-		super.setSize(Strings.DEFAULT_DIM);
 				
 		// contentPane related things
 		this.contentPane = new JPanel();
@@ -41,11 +39,25 @@ public class UserSettingOptions extends MultiUtilityDialog {
 		super.setContentPane(this.contentPane);
 		
 		this.btnConsoleSettings = new JButton("Console Settings");
-		this.btnConsoleSettings.setBounds(10, 11, 176, 56);
+		this.btnConsoleSettings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				UserConsoleOptions option = new UserConsoleOptions();
+				option.setVisible(true);
+			}
+		});
+		this.btnConsoleSettings.setBounds(10, 11, 167, 56);
 		this.contentPane.add(this.btnConsoleSettings);
 		
 		this.btnSystemSettings = new JButton("System Settings");
-		this.btnSystemSettings.setBounds(10, 78, 176, 56);
+		this.btnSystemSettings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				UserSystemOptions option = new UserSystemOptions();
+				option.setVisible(true);
+			}
+		});
+		this.btnSystemSettings.setBounds(10, 115, 167, 56);
 		this.contentPane.add(this.btnSystemSettings);
 		
 		this.btnMenuSettings = new JButton("Menu Settings");
@@ -56,7 +68,7 @@ public class UserSettingOptions extends MultiUtilityDialog {
 				option.setVisible(true);
 			}
 		});
-		this.btnMenuSettings.setBounds(10, 141, 176, 56);
+		this.btnMenuSettings.setBounds(196, 56, 138, 71);
 		this.contentPane.add(this.btnMenuSettings);
 		
 		this.setLocationRelativeTo(null);
